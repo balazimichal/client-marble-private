@@ -74,6 +74,13 @@ add_shortcode('auto-year', 'auto_year');
 
 
 
+// MARBLE SOCIAL
+function marble_social() { 
+	$marble_social = null;
+	$marble_social =  do_shortcode('[fusion_social_links icons_boxed="" icons_boxed_radius="" color_type="" icon_colors="" box_colors="" tooltip_placement="" blogger="" deviantart="" digg="" dribbble="" dropbox="" facebook="https://www.facebook.com/MarbleLDN/?ref=br_rs&hc_ref=ARTGEN5r2OzEiuxRd5Z_5VeP3idDX4DlHAmzdxGoZuM_U9kWsSn3EtaAfEpcxYAvTbk" flickr="" forrst="" googleplus="" instagram="https://www.instagram.com/marble_ldn/" linkedin="https://www.linkedin.com/company/11149903/" myspace="" paypal="" pinterest="" reddit="" rss="" skype="" soundcloud="" spotify="" tumblr="" twitter="" vimeo="" vk="" xing="" yahoo="" yelp="" youtube="https://www.youtube.com/channel/UCjzzZNhepFtiZl3b4fa0SjQ" email="" show_custom="no" alignment="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id="" /]'); 
+	return $marble_social;
+}
+add_shortcode('marble-social', 'marble_social');
 
 
 // REGISTER THE GRID SKIN - MARBLE THOUGHTS + MARBLE OUR WORK
@@ -185,7 +192,6 @@ function marble_team() {
             $marble_team .= '<div class="marble-team-image marble-grid-item" style="background: #f8f8f8 url('.$image_url.') no-repeat center center;background-size:cover">';
             $marble_team .= '<div class="hidden-content marble-grid-item">';
             $marble_team .= '<div class="hidden-content-wrap">';
-            $marble_team .= '<h3>'.get_sub_field('team_member_name').'</h3>';
             $marble_team .= get_sub_field('team_member_bio');
             $marble_team .= '</div>';
             $marble_team .= '</div>';
@@ -200,6 +206,69 @@ function marble_team() {
         $marble_team .= '</div>';
 	endif;
 	}
+
+
+	$marble_team .= '<style>
+		.marble-team{position:relative;margin-left:-3.33%}
+		.marble-team-member{width:30%;float:left;overflow:hidden !important;margin-left:3.33%;}
+		.marble-team-member.empty-block{display:block;color:#fff !important;}
+		.marble-team-member h3{font-size:30px;line-height:46px;text-transform:uppercase;text-align:center;margin-bottom:10px;}
+		.marble-team-headshot{overflow:hidden;background:rgba(216,216,216,0.16);min-height:320px;width:100%;display:block;position:relative;}
+		.marble-team-image{opacity:1;min-height:320px;width:100%;display:block;  -webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
+		.marble-team-member:hover .marble-team-image{background:transparent !important;}
+		.marble-team-title{padding-top:40px;padding-bottom:70px;}
+		.marble-team-role{text-align:center;font-size:16px;display:block;color:#767676;}
+		.hidden-content{background:transparent;position:absolute;top:0;left:0;height:100%;width:100%;opacity:0;  -webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
+		.marble-team-member:hover .hidden-content{opacity:1;}
+		.hidden-content-wrap{background:rgba(0,0,0,0.7);width:105%;height:105%;display:block;overflow:scroll;padding:40px;}
+		.marble-team-member .hidden-content h3{color:#F47E76;text-align:left !important;text-transform:none;font-size:36px;margin-bottom:30px;}
+		.marble-team-member .hidden-content p{margin-bottom:20px;color:#fff;}
+		.marble-team-member .hidden-content ul{margin:0;padding:0 30px;}
+		.marble-team-member .hidden-content ul li{color:#fff !important;margin-bottom:10px;}
+
+		.team-member-mobile-wrap{background:rgba(0,0,0,0.9);padding:30px;position:absolute;left:0;display:none;color:#fff;width:100%;}
+		.team-member-mobile-wrap h3{color:#F47E76;margin-bottom:20px;}
+		.team-member-mobile-wrap img{margin-bottom:30px;}
+		.member-close-button{display:block;width:60px;height:30px;position:absolute;top:46px;right:30px;cursor:pointer;font-size:14px;letter-spacing:1px;}
+
+
+		@media only screen and (max-width: 1600px) {
+			.marble-team-member .hidden-content h3{margin-bottom:20px;}
+			.marble-team-member .hidden-content p{font-size:17px;}
+			.marble-team-member .hidden-content li{font-size:17px;}
+		}
+
+		@media only screen and (max-width: 1200px) {
+			.marble-team{margin-left:-5%}
+			.marble-team-member{width:45%;float:left;margin-left:5%}
+			.hidden-content-wrap{padding:30px;}
+			.marble-team-member.empty-block{width:25% !important;}
+		}
+
+		@media only screen and (max-width: 800px) {
+			.marble-team-title{padding:10px 10px 30px;overflow:hidden;height:140px;}
+			.hidden-content-wrap{display:none;}
+			#main .post-content .marble-team-title h3{font-size:22px;margin:0;}
+			#main .post-content .marble-team-role{font-size:16px;line-height:18px;}
+			.marble-team-headshot{min-height:auto;}
+		}
+
+		@media only screen and (max-width: 600px) {
+			.marble-team{margin-left:0%}
+			.marble-team-member{width:100%;float:left;margin-left:0%}
+			.marble-team-title{padding:10px;}
+			.hidden-content-wrap{padding:40px;}
+		}
+
+		@media only screen and (max-width: 400px) {
+			.hidden-content-wrap{padding:30px;}
+		}
+
+	</style>';
+
+
 
 	$marble_team .= '<script>
 	$(function() {
@@ -245,7 +314,7 @@ add_shortcode('marble-team', 'marble_team');
 function marble_socialbar() { 
 	$marble_socialbar = null;
 	$marble_socialbar .= '<div class="marble-socialbar">';
-	$marble_socialbar .= '[fusion_social_links icons_boxed="" icons_boxed_radius="" color_type="" icon_colors="" box_colors="" tooltip_placement="" blogger="" deviantart="" digg="" dribbble="" dropbox="" facebook="https://www.facebook.com/MarbleLDN/?ref=br_rs&hc_ref=ARTGEN5r2OzEiuxRd5Z_5VeP3idDX4DlHAmzdxGoZuM_U9kWsSn3EtaAfEpcxYAvTbk" flickr="" forrst="" googleplus="" instagram="https://www.instagram.com/marble_ldn/" linkedin="https://www.linkedin.com/company/11149903/" myspace="" paypal="" pinterest="" reddit="" rss="" skype="" soundcloud="" spotify="" tumblr="" twitter="" vimeo="" vk="" xing="" yahoo="" yelp="" youtube="https://www.youtube.com/channel/UCjzzZNhepFtiZl3b4fa0SjQ" email="" show_custom="no" alignment="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id="" /]';
+	$marble_socialbar .= '[marble-social]';
 	$marble_socialbar .= '</div>';
 	$marble_socialbar .= '<style>
 	.marble-socialbar{height:130px;line-height:130px;padding:0 30px;text-align:right;}
@@ -334,7 +403,7 @@ function marble_mobile_navigation() {
 	$marble_navigation .= '</div>';
 	$marble_navigation .= '<div class="marble-mobile-navigation-dropdown">';
 	$marble_navigation .= $marble_menu;
-	$marble_navigation .= '[fusion_social_links icons_boxed="" icons_boxed_radius="" color_type="" icon_colors="" box_colors="" tooltip_placement="" blogger="" deviantart="" digg="" dribbble="" dropbox="" facebook="https://www.facebook.com/MarbleLDN/?ref=br_rs&hc_ref=ARTGEN5r2OzEiuxRd5Z_5VeP3idDX4DlHAmzdxGoZuM_U9kWsSn3EtaAfEpcxYAvTbk" flickr="" forrst="" googleplus="" instagram="https://www.instagram.com/marble_ldn/" linkedin="https://www.linkedin.com/company/11149903/" myspace="" paypal="" pinterest="" reddit="" rss="" skype="" soundcloud="" spotify="" tumblr="" twitter="" vimeo="" vk="" xing="" yahoo="" yelp="" youtube="https://www.youtube.com/channel/UCjzzZNhepFtiZl3b4fa0SjQ" email="" show_custom="no" alignment="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id="" /]';
+	$marble_navigation .= '[marble-social]';
 	$marble_navigation .= '</div>';
 	$marble_navigation .= '</div>';
 
@@ -360,10 +429,7 @@ function marble_mobile_navigation() {
 	</style>';
 
 	$marble_navigation .= '<script>
-	$(function() {
-		// Making sure scripts are working right
-		console.log("%c THIS IS MARBLE LDN","font-size:22px;color:#226C80");
-		
+	$(function() {	
 		// TOGGLE MOBILE MENU
 		jQuery(".marble-mobile-navigation-dropdown").hide();
 		jQuery(".marble-mobile-navigation-dropdown .close").hide();
@@ -437,7 +503,7 @@ function marble_footer() {
 	$marble_footer .= '</div>';
 
 	$marble_footer .= '<div class="footer-col-3">';
-	$marble_footer .= '[fusion_social_links icons_boxed="" icons_boxed_radius="" color_type="" icon_colors="" box_colors="" tooltip_placement="" blogger="" deviantart="" digg="" dribbble="" dropbox="" facebook="https://www.facebook.com/MarbleLDN/?ref=br_rs&hc_ref=ARTGEN5r2OzEiuxRd5Z_5VeP3idDX4DlHAmzdxGoZuM_U9kWsSn3EtaAfEpcxYAvTbk" flickr="" forrst="" googleplus="" instagram="https://www.instagram.com/marble_ldn/" linkedin="https://www.linkedin.com/company/11149903/" myspace="" paypal="" pinterest="" reddit="" rss="" skype="" soundcloud="" spotify="" tumblr="" twitter="" vimeo="" vk="" xing="" yahoo="" yelp="" youtube="https://www.youtube.com/channel/UCjzzZNhepFtiZl3b4fa0SjQ" email="" show_custom="no" alignment="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id="" /]';	
+	$marble_footer .= '[marble-social]';	
 	$marble_footer .= '<img class="marble-footer-logo" src="http://happyrobot.eu/marble-private/wp-content/uploads/2018/05/mp-logo-footer.png" alt="" />';
 	$marble_footer .= '</div>';
 
@@ -452,7 +518,7 @@ function marble_footer() {
 
 	$marble_footer .= '<div class="footer-col-3">';
 	$marble_footer .= '<img class="marble-footer-logo" src="http://happyrobot.eu/marble-private/wp-content/uploads/2018/05/mp-logo-footer.png" alt="" />';
-	$marble_footer .= '[fusion_social_links icons_boxed="" icons_boxed_radius="" color_type="" icon_colors="" box_colors="" tooltip_placement="" blogger="" deviantart="" digg="" dribbble="" dropbox="" facebook="https://www.facebook.com/MarbleLDN/?ref=br_rs&hc_ref=ARTGEN5r2OzEiuxRd5Z_5VeP3idDX4DlHAmzdxGoZuM_U9kWsSn3EtaAfEpcxYAvTbk" flickr="" forrst="" googleplus="" instagram="https://www.instagram.com/marble_ldn/" linkedin="https://www.linkedin.com/company/11149903/" myspace="" paypal="" pinterest="" reddit="" rss="" skype="" soundcloud="" spotify="" tumblr="" twitter="" vimeo="" vk="" xing="" yahoo="" yelp="" youtube="https://www.youtube.com/channel/UCjzzZNhepFtiZl3b4fa0SjQ" email="" show_custom="no" alignment="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id="" /]';
+	$marble_footer .= '[marble-social]';
 	$marble_footer .= '</div>';
 
 	$marble_footer .= '<div class="footer-col-1">';
