@@ -271,8 +271,8 @@ function marble_team() {
 
 
 	$marble_team .= '<script>
-	$(function() {
-		jQuery( ".marble-team" ).append( "<div class="team-member-mobile-wrap"></div>" );
+	jQuery(function() {
+		jQuery( ".marble-team" ).append( \'<div class="team-member-mobile-wrap"></div>\' );
 		jQuery( ".marble-team-member" ).click(function(e) {
 			if (jQuery("body").width() < 800 ){
 				e.preventDefault();
@@ -284,7 +284,7 @@ function marble_team() {
 				console.log(relativeY);
 				jQuery( ".team-member-mobile-wrap" ).css("top", relativeY);
 
-				var tempContent = "<h3>" + memberTitle + "</h3><img src="\' + memberImage + \'" alt="" /><ul>\' + memberDesc + \'</ul><div class="member-close-button">CLOSE</div>\';
+				var tempContent = \'<h3>\' + memberTitle + \'</h3><img src="\' + memberImage + \'" alt="" /><ul>\' + memberDesc + \'</ul><div class="member-close-button">CLOSE</div>\';
 
 				jQuery(".team-member-mobile-wrap").html(tempContent).fadeIn();
 				jQuery( ".member-close-button" ).click(function(e) {
@@ -429,7 +429,7 @@ function marble_mobile_navigation() {
 	</style>';
 
 	$marble_navigation .= '<script>
-	$(function() {	
+	jQuery(function() {	
 		// TOGGLE MOBILE MENU
 		jQuery(".marble-mobile-navigation-dropdown").hide();
 		jQuery(".marble-mobile-navigation-dropdown .close").hide();
