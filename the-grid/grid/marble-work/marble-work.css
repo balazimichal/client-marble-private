@@ -1,0 +1,147 @@
+.marble-work a,
+.marble-work a:active,
+.marble-work a:focus {
+	text-decoration: none;
+    border: none;
+	-webkit-box-shadow: none;
+    box-shadow: none;
+	-webkit-transition: opacity 0.25s ease, color 0.25s ease, -webkit-transform 0.5s cubic-bezier(.39,1.89,.55,1.45);
+	-moz-transition: opacity 0.25s ease, color 0.25s ease, -moz-transform 0.5s cubic-bezier(.39,1.89,.55,1.45);
+	-ms-transition: opacity 0.25s ease, color 0.25s ease, -ms-transform 0.5s cubic-bezier(.39,1.89,.55,1.45);
+	-o-transition: opacity 0.25s ease, color 0.25s ease, -o-transform 0.5s cubic-bezier(.39,1.89,.55,1.45);
+	transition: opacity 0.25s ease, color 0.25s ease, transform 0.5s cubic-bezier(.39,1.89,.55,1.45);
+}
+.marble-work .tg-item-content,
+.marble-work .tg-item-media-holder,
+.marble-work .tg-item-overlay {
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.marble-work .tg-item-link {
+	position: absolute;
+	display: block;
+	top: -22px;
+    left: -28px;
+    right: -28px;
+    bottom: -22px;
+}
+.marble-work .tg-item-content {
+	margin: 22px 28px;
+}
+.marble-work .tg-item-content,
+.marble-work .tg-item-overlay {
+	opacity: 0;
+}
+.marble-work:hover .tg-item-content,
+.marble-work:hover .tg-item-overlay {
+	opacity: 1;
+}
+.marble-work .tg-cats-holder,
+.marble-work .tg-item-title,
+.marble-work .tg-item-footer {
+	-webkit-transition: -webkit-transform 0.25s ease;
+	-moz-transition: -moz-transform 0.25s ease;
+	-ms-transition: -ms-transform 0.25s ease;
+	-o-transition: -o-transform 0.25s ease;
+	transition: transform 0.25s ease;
+}
+.marble-work .tg-item-title,
+.marble-work .tg-item-title a {
+	position: relative;
+	display: inline-block;
+    font-size: 20px;
+	line-height: 26px;
+	font-weight: 600;
+	margin: 0 !important;
+	padding: 0 !important;
+    margin-bottom:10px !important;
+}
+.tg-layout-justified .marble-work .tg-item-title,
+.tg-layout-justified .marble-work .tg-item-title a {
+    font-size: 15px;
+	line-height: 18px;
+}
+.marble-work .tg-item-title {
+	margin: 0 20px 0 0 !important;
+}
+.marble-work .tg-item-title  {
+	-webkit-transform: translate3d(0,22px,0);
+	-moz-transform: translate3d(0,22px,0);
+	-ms-transform: translate3d(0,22px,0);
+	-o-transform: translate3d(0,22px,0);
+	transform: translate3d(0,22px,0);
+}
+.marble-work .tg-cats-holder {
+	position: relative;
+	display: block;
+	margin: 0 0 10px 0;
+	font-size: 13px;
+	line-height: 18px;
+}
+.marble-work .tg-cats-holder {
+	position: relative;
+	display: block;
+	margin: 0 0 10px 0;
+	font-size: 13px;
+	line-height: 18px;
+	-webkit-transform: translate3d(0,-22px,0);
+	-moz-transform: translate3d(0,-22px,0);
+	-ms-transform: translate3d(0,-22px,0);
+	-o-transform: translate3d(0,-22px,0);
+	transform: translate3d(0,-22px,0);
+}
+.marble-work .tg-item-footer {
+	position: absolute;
+	display: block;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.marble-work:hover .tg-cats-holder,
+.marble-work:hover .tg-item-title {
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+.marble-work .tg-item-author {
+	position: absolute;
+	display: block;
+	bottom: 0;
+	left: 0;
+    font-size: 13px;
+	line-height: 13px;
+	font-weight: 600;
+}
+.marble-work .tg-media-button {
+	position: absolute;
+	display: block;
+	bottom: 0;
+	right: 0;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	text-align: center;
+}
+.marble-work h2 a:hover,
+.marble-work .tg-cats-holder a:hover,
+.marble-work .tg-media-button:hover {
+	opacity: 0.75;
+}
+.marble-work .tg-media-button i {
+	position: relative;
+	display: block;
+	width: 20px;
+	height: 20px;
+    font-size: 20px;
+	line-height: 20px;
+	cursor: pointer;
+}
+.marble-work .tg-media-button .tg-icon-add {
+    font-size: 28px;
+}

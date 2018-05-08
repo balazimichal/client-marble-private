@@ -1,0 +1,166 @@
+.marble-thoughts a,
+.marble-thoughts a:active,
+.marble-thoughts a:focus,
+.marble-thoughts .tg-item-title,
+.marble-thoughts .tg-item-media-holder,
+.marble-thoughts .tg-item-content-holder {
+	text-decoration: none;
+    border: none;
+	-webkit-box-shadow: none;
+    box-shadow: none;
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+	-ms-transition: all 0.25s ease-in-out;
+	-o-transition: all 0.25s ease-in-out;
+	transition: all 0.25s ease-in-out;
+}
+.marble-thoughts.tg-item,
+.marble-thoughts .tg-center-holder {
+	overflow: hidden;
+}
+.marble-thoughts .tg-center-holder {
+	text-align: center;
+}
+.marble-thoughts .tg-item-media-holder {
+	bottom: 60px;
+	height: auto;
+}
+.tg-layout-justified .marble-thoughts .tg-item-media-holder {
+	bottom: 0;
+}
+.marble-thoughts .tg-item-link {
+	position: absolute;
+    display: block;
+    top: -1000%;
+    left: 0;
+    width: 100%;
+    height: 2000%;
+}
+.marble-thoughts .tg-item-content-holder,
+.marble-thoughts .tg-item-overlay {
+	position: absolute;
+	display: block;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.tg-layout-justified .marble-thoughts .tg-center-holder {
+	padding-bottom: 60px;
+}
+.tg-layout-justified .marble-thoughts .tg-item-content-holder,
+.marble-thoughts .tg-item-overlay {
+	opacity: 0;
+	visibility: hidden;
+}
+.tg-layout-justified .marble-thoughts:not(.tg-is-playing):not(.tg-force-play):hover .tg-item-content-holder,
+.marble-thoughts:not(.tg-is-playing):not(.tg-force-play):hover .tg-item-overlay {
+	opacity: 1;
+	visibility: visible;
+}
+.marble-thoughts .tg-item-content-holder {
+	height: 170px;
+	padding: 40px;
+	background: #ffffff;
+}
+.marble-thoughts .tg-item-title,
+.marble-thoughts .tg-item-title a {
+	position: relative;
+    font-size: 20px !important;
+	line-height: 20px !important;
+	font-weight: 400;
+	margin: 0 !important;
+	padding: 0 !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    margin-bottom:20px;
+}
+.marble-thoughts .tg-item-title {
+	padding: 0 2px !important;
+	margin: 0 !important;
+}
+.marble-thoughts .tg-cats-holder {
+	position: relative;
+	display: block;
+	margin: 0 40px 0 0;
+	padding: 0 2px;
+	font-size: 13px;
+	line-height: 18px;
+	font-style: italic;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.marble-thoughts .tg-cats-holder * {
+	position: relative;
+}
+.marble-thoughts .tg-link-button,
+.marble-thoughts .tg-media-button {
+    position: relative;
+    display: inline-block;
+	vertical-align: top;
+    margin: 10px !important;
+	padding: 0 !important;
+    top: 0;
+    right: 0;
+    width: 35px;
+    height:35px;
+    cursor: pointer;
+    text-align: center;
+	opacity: 0;
+}
+.marble-thoughts .tg-link-button i,
+.marble-thoughts .tg-media-button i {
+	position: relative;
+	display: block;
+	width: 35px;
+	height: 35px;
+    font-size: 22px;
+	line-height: 35px;
+	cursor: pointer;
+}
+.marble-thoughts .tg-media-button .tg-icon-add {
+    font-size: 28px;
+}
+.marble-thoughts .tg-media-button {	
+	-webkit-transform: translate3d(-40px,0,0);
+	-moz-transform: translate3d(-40px,0,0);
+	-ms-transform: translate3d(-40px,0,0);
+	-o-transform: translate3d(-40px,0,0);
+	transform: translate3d(-40px,0,0);
+}
+.marble-thoughts .tg-link-button {
+	-webkit-transform: translate3d(40px,0,0);
+	-moz-transform: translate3d(40px,0,0);
+	-ms-transform: translate3d(40px,0,0);
+	-o-transform: translate3d(40px,0,0);
+	transform: translate3d(40px,0,0);
+}
+.marble-thoughts:hover .tg-link-button,
+.marble-thoughts:hover .tg-media-button {
+	opacity: 1;
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+.marble-thoughts .tg-item-title:hover,
+.marble-thoughts .tg-link-button:hover,
+.marble-thoughts .tg-cats-holder a:hover,
+.marble-thoughts .tg-media-button:hover {
+	opacity: 0.75;
+}
+.marble-thoughts .to-post-like {
+	position: absolute;
+    display: block;
+    right: 14px;
+    top: 12px;
+	margin: 0;
+    font-size: 14px;
+    line-height: 14px;   
+}
+.tg-item .tg-center-holder{
+    display:none !important;
+}
