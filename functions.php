@@ -247,7 +247,7 @@ function marble_team() {
 		.hidden-content{background:transparent;position:absolute;top:0;left:0;height:100%;width:100%;opacity:0;  -webkit-transition: all 0.5s ease-in-out;
 		-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
 		.marble-team-member:hover .hidden-content{opacity:1;}
-		.hidden-content-wrap{background:rgba(0,0,0,0.7);width:105%;height:105%;display:block;overflow:scroll;padding:40px;}
+		.hidden-content-wrap{background:rgba(0,0,0,0.7);width:105%;height:200%;display:block;overflow:scroll;padding:40px;}
 		.marble-team-member .hidden-content h3{color:#F47E76;text-align:left !important;text-transform:none;font-size:36px;margin-bottom:30px;}
 		.marble-team-member .hidden-content p{margin-bottom:20px;color:#fff;}
 		.marble-team-member .hidden-content ul{margin:0;padding:0 30px;}
@@ -360,20 +360,17 @@ function marble_collective() {
             $marble_collective .= '<div class="marble-collective-image marble-grid-item" style="background: #f8f8f8 url(\''.$image_url.'\') no-repeat center center;background-size:cover">';
             $marble_collective .= '<div class="hidden-content marble-grid-item">';
             $marble_collective .= '<div class="hidden-content-wrap">';
-            $marble_collective .= '<h3>'.get_sub_field('member_name').'</h3>';
             $marble_collective .= '<p>'.get_sub_field('member_bio').'</p>';
-            if(get_sub_field('member_link')){
-                $marble_collective .= '<a href="'.get_sub_field('member_link').'" target="_blank" class="marble-button">';
-                $marble_collective .= 'VISIT SITE';
-                $marble_collective .= '</a>';
-            }
+
             $marble_collective .= '</div>';
             $marble_collective .= '</div>';
             $marble_collective .= '</div>';
             $marble_collective .= '</div>';
             $marble_collective .= '<div class="marble-collective-title">';
-            $marble_collective .= '<h3>'.get_sub_field('member_title').'</h3>';
-            $marble_collective .= '<span class="marble-collective-role">'.get_sub_field('member_role').'</span>';
+			$marble_collective .= '<h3>'.get_sub_field('member_title').'</h3>';
+			if(get_sub_field('member_link')){
+			$marble_collective .= '<span class="visit-website"><a href="'.get_sub_field('member_link').'" target="_blank">Visit website</a></span>';
+			}
             $marble_collective .= '</div>';
             if(get_sub_field('member_link')){
             }
@@ -385,17 +382,18 @@ function marble_collective() {
 		.marble-collective-member{width:30%;float:left;overflow:hidden;margin-left:3.33%}
 		.marble-collective-member.empty-block{display:block;color:#fff !important;}
 		.marble-collective-member h3{font-size:20px;line-height:46px;text-transform:uppercase;text-align:center;margin-bottom:10px;}
-		.marble-collective-member .marble-button{position:absolute;bottom:40px;left:50%;margin-left:-70px;}
+		.marble-collective-member .visit-website{text-decoration:underline;}
+		.marble-collective-member .visit-website a{text-align:center;display:block;font-size:16px;color:#767676;}
 		.marble-collective-headshot{overflow:hidden;background:rgba(216,216,216,0.16);min-height:320px;width:100%;display:block;position:relative;}
 		.marble-collective-image{opacity:1;min-height:320px;width:100%;display:block;  -webkit-transition: all 0.5s ease-in-out;
 		-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
 		.marble-collective-member:hover .marble-team-image{background:transparent !important;}
-		.marble-collective-title{padding-top:20px;padding-bottom:70px;}
+		.marble-collective-title{padding-top:20px;height:150px;padding-bottom:30px;}
 		.marble-collective-role{text-transform:uppercase;text-align:center;font-size:14px;display:block;color:#B3B3B3;}
 		.hidden-content{background:transparent;position:absolute;top:0;left:0;height:100%;width:100%;opacity:0;  -webkit-transition: all 0.5s ease-in-out;
 		-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
 		.marble-collective-member:hover .hidden-content{opacity:1;}
-		.hidden-content-wrap{background:rgba(0,0,0,0.7);width:105%;height:105%;display:block;overflow:scroll;padding:40px;color:#fff;}
+		.hidden-content-wrap{background:rgba(0,0,0,0.7);width:105%;height:200%;display:block;overflow:scroll;padding:40px;color:#fff;}
 		.marble-collective-member .hidden-content h3{color:#F47E76;text-align:left !important;text-transform:none;font-size:36px;margin-bottom:30px;}
 		.marble-collective-member .hidden-content ul{margin:0;padding:0 30px;}
 		.marble-collective-member .hidden-content ul li{color:#fff !important;margin-bottom:10px;}
@@ -446,6 +444,25 @@ function marble_socialbar() {
 add_action( 'avada_before_header_wrapper', 'marble_socialbar' );
 
 
+
+
+
+
+// SOCIAL ON THOUGHTS
+function mp_thoughts_social() { 
+	$mp_thoughts_social = null;
+	$mp_thoughts_social .= '<div class="marble-thoughts-social">';
+	$mp_thoughts_social .= '[marble-social]';
+	$mp_thoughts_social .= '<a href="#">Share this article</a>';
+	$mp_thoughts_social .= '</div>';
+	$mp_thoughts_social .= '<style>
+	.marble-thoughts-social{text-align:center;}
+	.marble-thoughts-social a{text-decoration:underline;font-size:18px;font-family:"spectral-light"}
+	</style>';
+	$mp_thoughts_social = do_shortcode($mp_thoughts_social); 
+	return $mp_thoughts_social;
+}
+add_shortcode('mp-thoughts-social', 'mp_thoughts_social');
 
 
 
