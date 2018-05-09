@@ -29,13 +29,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 			
 			
 			<div class="post-content">
-				<h3 class="mp-title">Our Thoughts</h3>
-				<p>Have a look at what inspires us and what we are thinking about.</p>
+				<div class="our-thoughts-titlebar">
+					<h3 class="mp-title"><?php echo get_field('single_post_title','option'); ?></h3>
+					<p class="intro"><?php echo get_field('single_post_subtitle','option'); ?></p>
+				</div>
 
-				<?php
-				$featured_img_url = get_the_post_thumbnail_url('full'); 
-				echo '<img src="'.$featured_img_url.'" alt="" />';
-				?>
+				<div class="our-thoughts-featured">
+					<?php
+					echo get_the_post_thumbnail( get_the_ID(), 'full' );
+					?>
+				</div>
+
+				<div class="our-thoughts-date">
+					<span class="entry-date"><?php echo get_the_date(); ?></span>
+					<span class="fancy-date rotate">THOUGHTS <?php echo get_the_date(); ?></span>
+				</div>
+
 				<?php the_content(); ?>
 			</div>
 
@@ -50,9 +59,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="mp-navigation">
 	<?php // previous_post_link( '%link', esc_attr__( 'Previous', 'Avada' ) ); ?>
-	<a href="/our-thoughts/">Back to Journal</a>
+	<a href="<?php echo get_field('back_link_url','option'); ?>"><?php echo get_field('back_link_text','option'); ?></a>
 	<?php next_post_link( '%link', esc_attr__( 'Next Atticle', 'Avada' ) ); ?>
 </div>
+
+<?php echo do_shortcode('[mp-cta-journal]'); ?>
 
 
 

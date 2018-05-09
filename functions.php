@@ -74,6 +74,31 @@ add_shortcode('auto-year', 'auto_year');
 
 
 
+
+// MARBLE CTA JOURNAL
+function mp_cta_journal() { 
+
+	$mp_cta_journal = null;
+	$mp_cta_journal .= '<div class="mp-cta-journal">';
+	$mp_cta_journal .= '<h3>' . get_field('cta_title','option') . '</h3>';
+	$mp_cta_journal .= '<p><a href="' . get_field('cta_url','option') . '" target="_blank">' . get_field('cta_link_text','option') . '</a></p>';
+	$mp_cta_journal .= '</div>';
+	return $mp_cta_journal; 
+}
+add_shortcode('mp-cta-journal', 'mp_cta_journal');
+
+
+
+
+
+
+
+
+
+
+
+
+
 // MARBLE SOCIAL
 function marble_social() { 
 	$marble_social = null;
