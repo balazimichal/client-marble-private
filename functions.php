@@ -172,13 +172,13 @@ if( function_exists('acf_add_options_page') ) {
 		'menu_title'	=> $THEME_GLOBALS['theme_name'].' Team',
 		'parent_slug'	=> 'theme-general-settings',
 	));
-	/*
+	
 	acf_add_options_sub_page(array(
-		'page_title' 	=> $THEME_GLOBALS['theme_name'].' Members',
-		'menu_title'	=> $THEME_GLOBALS['theme_name'].' Members',
+		'page_title' 	=> $THEME_GLOBALS['theme_name'].' Collective',
+		'menu_title'	=> $THEME_GLOBALS['theme_name'].' Collective',
 		'parent_slug'	=> 'theme-general-settings',
 	));
-	*/
+	
 }
 
 
@@ -188,7 +188,7 @@ if( function_exists('acf_add_options_page') ) {
 
 
 
-// TEAMS SHORTCODE
+// MARBLE TEAM
 function marble_team() {
 
 	$marble_team = null;
@@ -329,6 +329,61 @@ add_shortcode('marble-team', 'marble_team');
 
 
 
+
+
+
+
+// MARBLE COLLECTIVE
+function marble_collective() {
+    $marble_members = null;
+    $x = 0;
+    $count = count( get_field('collective', 'option'));
+    $center_last_box = false;
+    if($count % 3 == 1) {$center_last_box = true;}
+    if( have_rows('collective', 'option') ):
+        $marble_members .= '<div class="marble-collective">';
+        while ( have_rows('collective', 'option') ) : the_row();
+            $x++;
+            $member_image = get_sub_field('member_image');
+            $image_size = 'thumb-grid';
+            $image_url = $member_image['sizes'][$image_size];
+            $member_headshot = get_sub_field('member_headshot');
+            $image_size = 'thumb-grid';
+            $headshot_url = $member_headshot['sizes'][$image_size];
+            if($center_last_box && $count == $x){
+                $marble_members .= '<div class="marble-collective-member empty-block">';
+                $marble_members .= 'x';
+                $marble_members .= '</div>';
+            }
+            $marble_members .= '<div class="marble-collective-member">';
+            $marble_members .= '<div class="marble-collective-headshot marble-grid-item" style="background: #f8f8f8 url(\''.$image_url.'\') no-repeat center top;background-size:cover">';
+            $marble_members .= '<div class="marble-collective-image marble-grid-item" style="background: #f8f8f8 url(\''.$image_url.'\') no-repeat center center;background-size:cover">';
+            $marble_members .= '<div class="hidden-content marble-grid-item">';
+            $marble_members .= '<div class="hidden-content-wrap">';
+            $marble_members .= '<h3>'.get_sub_field('member_name').'</h3>';
+            $marble_members .= '<p>'.get_sub_field('member_bio').'</p>';
+            if(get_sub_field('member_link')){
+                $marble_members .= '<a href="'.get_sub_field('member_link').'" target="_blank" class="marble-button">';
+                $marble_members .= 'VISIT SITE';
+                $marble_members .= '</a>';
+            }
+            $marble_members .= '</div>';
+            $marble_members .= '</div>';
+            $marble_members .= '</div>';
+            $marble_members .= '</div>';
+            $marble_members .= '<div class="marble-collective-title">';
+            $marble_members .= '<h3>'.get_sub_field('member_title').'</h3>';
+            $marble_members .= '<span class="marble-collective-role">'.get_sub_field('member_role').'</span>';
+            $marble_members .= '</div>';
+            if(get_sub_field('member_link')){
+            }
+            $marble_members .= '</div>';
+        endwhile;
+        $marble_members .= '</div>';
+    endif;
+    return $marble_members;
+}
+add_shortcode('marble-collective', 'marble_collective');
 
 
 
