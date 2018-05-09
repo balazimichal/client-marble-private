@@ -83,6 +83,15 @@ function mp_cta_journal() {
 	$mp_cta_journal .= '<h3>' . get_field('cta_title','option') . '</h3>';
 	$mp_cta_journal .= '<p><a href="' . get_field('cta_url','option') . '" target="_blank">' . get_field('cta_link_text','option') . '</a></p>';
 	$mp_cta_journal .= '</div>';
+	$mp_cta_journal .= '<style>
+	.mp-cta-journal{text-align:center;border-top:1px solid #ddd;padding:100px 0 50px;}
+	.mp-cta-journal h3{font-size:62px;line-height:70px;font-family:"spectral-light";margin-bottom:70px;font-weight:normal;padding:0 30px;}
+	.mp-cta-journal a{text-decoration:underline;}
+	@media (max-width: 800px) {
+		.mp-cta-journal h3{font-size:32px;line-height:42px;}
+	}
+	</style>';
+
 	return $mp_cta_journal; 
 }
 add_shortcode('mp-cta-journal', 'mp_cta_journal');
@@ -442,6 +451,54 @@ function marble_socialbar() {
 	echo do_shortcode($marble_socialbar); 
 }
 add_action( 'avada_before_header_wrapper', 'marble_socialbar' );
+
+
+
+
+
+
+
+// OUR THOUGHTS
+function mp_our_thoughts() { 
+$mp_our_thoughts = null;
+$args = array(
+'post_type' => 'our_thoughts',
+'orderby' => 'date',
+'order'   => 'DESC',
+'posts_per_page' => 9,
+);
+// The Query
+$the_query = new WP_Query( $args );    
+// The Loop
+if ( $the_query->have_posts() ) {
+$mp_our_thoughts .= '<div class="blazit-blog">';
+while ( $the_query->have_posts() ) {
+$the_query->the_post();
+    
+$thumb_id = get_post_thumbnail_id();
+$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'blazit-articles', true);
+$thumb_url = $thumb_url_array[0];
+    
+    
+    
+$mp_our_thoughts .= '<div class="blazit-post">';
+$mp_our_thoughts .= '<div class="blazit-post-image"><a href="' . get_permalink() . '"><img src="'.$thumb_url.'" alt="" /></a></div>';
+$mp_our_thoughts .= '<div class="blazit-post-excerpt">';
+$mp_our_thoughts .= '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
+$mp_our_thoughts .= get_the_excerpt();
+$mp_our_thoughts .= '<div class="blazit-read-more"><a href="' . get_permalink() . '">Read more</a></div>';
+$mp_our_thoughts .= '</div>';
+$mp_our_thoughts .= '</div>';
+}
+$mp_our_thoughts .= '</div>';
+wp_reset_postdata();
+} 
+    
+return $mp_our_thoughts;
+}
+add_shortcode('mp-our-thoughts', 'mp_our_thoughts');
+
+
 
 
 
