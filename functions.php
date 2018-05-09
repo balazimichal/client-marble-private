@@ -335,13 +335,13 @@ add_shortcode('marble-team', 'marble_team');
 
 // MARBLE COLLECTIVE
 function marble_collective() {
-    $marble_members = null;
+    $marble_collective = null;
     $x = 0;
     $count = count( get_field('collective', 'option'));
     $center_last_box = false;
     if($count % 3 == 1) {$center_last_box = true;}
     if( have_rows('collective', 'option') ):
-        $marble_members .= '<div class="marble-collective">';
+        $marble_collective .= '<div class="marble-collective">';
         while ( have_rows('collective', 'option') ) : the_row();
             $x++;
             $member_image = get_sub_field('member_image');
@@ -351,37 +351,75 @@ function marble_collective() {
             $image_size = 'thumb-grid';
             $headshot_url = $member_headshot['sizes'][$image_size];
             if($center_last_box && $count == $x){
-                $marble_members .= '<div class="marble-collective-member empty-block">';
-                $marble_members .= 'x';
-                $marble_members .= '</div>';
+                $marble_collective .= '<div class="marble-collective-member empty-block">';
+                $marble_collective .= 'x';
+                $marble_collective .= '</div>';
             }
-            $marble_members .= '<div class="marble-collective-member">';
-            $marble_members .= '<div class="marble-collective-headshot marble-grid-item" style="background: #f8f8f8 url(\''.$image_url.'\') no-repeat center top;background-size:cover">';
-            $marble_members .= '<div class="marble-collective-image marble-grid-item" style="background: #f8f8f8 url(\''.$image_url.'\') no-repeat center center;background-size:cover">';
-            $marble_members .= '<div class="hidden-content marble-grid-item">';
-            $marble_members .= '<div class="hidden-content-wrap">';
-            $marble_members .= '<h3>'.get_sub_field('member_name').'</h3>';
-            $marble_members .= '<p>'.get_sub_field('member_bio').'</p>';
+            $marble_collective .= '<div class="marble-collective-member">';
+            $marble_collective .= '<div class="marble-collective-headshot marble-grid-item" style="background: #f8f8f8 url(\''.$image_url.'\') no-repeat center top;background-size:cover">';
+            $marble_collective .= '<div class="marble-collective-image marble-grid-item" style="background: #f8f8f8 url(\''.$image_url.'\') no-repeat center center;background-size:cover">';
+            $marble_collective .= '<div class="hidden-content marble-grid-item">';
+            $marble_collective .= '<div class="hidden-content-wrap">';
+            $marble_collective .= '<h3>'.get_sub_field('member_name').'</h3>';
+            $marble_collective .= '<p>'.get_sub_field('member_bio').'</p>';
             if(get_sub_field('member_link')){
-                $marble_members .= '<a href="'.get_sub_field('member_link').'" target="_blank" class="marble-button">';
-                $marble_members .= 'VISIT SITE';
-                $marble_members .= '</a>';
+                $marble_collective .= '<a href="'.get_sub_field('member_link').'" target="_blank" class="marble-button">';
+                $marble_collective .= 'VISIT SITE';
+                $marble_collective .= '</a>';
             }
-            $marble_members .= '</div>';
-            $marble_members .= '</div>';
-            $marble_members .= '</div>';
-            $marble_members .= '</div>';
-            $marble_members .= '<div class="marble-collective-title">';
-            $marble_members .= '<h3>'.get_sub_field('member_title').'</h3>';
-            $marble_members .= '<span class="marble-collective-role">'.get_sub_field('member_role').'</span>';
-            $marble_members .= '</div>';
+            $marble_collective .= '</div>';
+            $marble_collective .= '</div>';
+            $marble_collective .= '</div>';
+            $marble_collective .= '</div>';
+            $marble_collective .= '<div class="marble-collective-title">';
+            $marble_collective .= '<h3>'.get_sub_field('member_title').'</h3>';
+            $marble_collective .= '<span class="marble-collective-role">'.get_sub_field('member_role').'</span>';
+            $marble_collective .= '</div>';
             if(get_sub_field('member_link')){
             }
-            $marble_members .= '</div>';
+            $marble_collective .= '</div>';
         endwhile;
-        $marble_members .= '</div>';
+		$marble_collective .= '</div>';
+		$marble_collective .= '<style>
+		.marble-collective{margin-left:-3.33%}
+		.marble-collective-member{width:30%;float:left;overflow:hidden;margin-left:3.33%}
+		.marble-collective-member.empty-block{display:block;color:#fff !important;}
+		.marble-collective-member h3{font-size:20px;line-height:46px;text-transform:uppercase;text-align:center;margin-bottom:10px;}
+		.marble-collective-member .marble-button{position:absolute;bottom:40px;left:50%;margin-left:-70px;}
+		.marble-collective-headshot{overflow:hidden;background:rgba(216,216,216,0.16);min-height:320px;width:100%;display:block;position:relative;}
+		.marble-collective-image{opacity:1;min-height:320px;width:100%;display:block;  -webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
+		.marble-collective-member:hover .marble-team-image{background:transparent !important;}
+		.marble-collective-title{padding-top:20px;padding-bottom:70px;}
+		.marble-collective-role{text-transform:uppercase;text-align:center;font-size:14px;display:block;color:#B3B3B3;}
+		.hidden-content{background:transparent;position:absolute;top:0;left:0;height:100%;width:100%;opacity:0;  -webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
+		.marble-collective-member:hover .hidden-content{opacity:1;}
+		.hidden-content-wrap{background:rgba(0,0,0,0.7);width:105%;height:105%;display:block;overflow:scroll;padding:40px;color:#fff;}
+		.marble-collective-member .hidden-content h3{color:#F47E76;text-align:left !important;text-transform:none;font-size:36px;margin-bottom:30px;}
+		.marble-collective-member .hidden-content ul{margin:0;padding:0 30px;}
+		.marble-collective-member .hidden-content ul li{color:#fff !important;margin-bottom:10px;}
+		@media only screen and (max-width: 1200px) {
+		.marble-collective{margin-left:-5%}
+		.marble-collective-member{width:45%;margin-left:5%}
+		.hidden-content-wrap{padding:30px;}
+		.marble-collective-member.empty-block{display:none;}
+		}
+		@media only screen and (max-width: 800px) {
+		.marble-collective{margin-left:0%}
+		.marble-collective-member{width:100%;float:lnone;margin-left:0%}
+		.marble-collective-title{padding-top:20px;padding-bottom:70px;}
+		.hidden-content-wrap{padding:80px;}
+		}
+		@media only screen and (max-width: 600px) {
+			.hidden-content-wrap{padding:40px;}
+		}
+		@media only screen and (max-width: 400px) {
+				.hidden-content-wrap{padding:30px;}
+		}
+		</style>';
     endif;
-    return $marble_members;
+    return $marble_collective;
 }
 add_shortcode('marble-collective', 'marble_collective');
 
