@@ -164,18 +164,19 @@ if( function_exists('acf_add_options_page') ) {
 		'capability'	=> 'edit_posts',
 		'redirect'		=> false
 	));
-	/*
+
     acf_add_options_sub_page(array(
 		'page_title' 	=> $THEME_GLOBALS['theme_name'].' Services',
 		'menu_title'	=> $THEME_GLOBALS['theme_name'].' Services',
 		'parent_slug'	=> 'theme-general-settings',
 	));
+
     acf_add_options_sub_page(array(
 		'page_title' 	=> $THEME_GLOBALS['theme_name'].' Music',
 		'menu_title'	=> $THEME_GLOBALS['theme_name'].' Music',
 		'parent_slug'	=> 'theme-general-settings',
 	));
-	*/
+
 	acf_add_options_sub_page(array(
 		'page_title' 	=> $THEME_GLOBALS['theme_name'].' Team',
 		'menu_title'	=> $THEME_GLOBALS['theme_name'].' Team',
@@ -190,6 +191,60 @@ if( function_exists('acf_add_options_page') ) {
 	
 }
 
+
+
+
+
+// MARBLE MUSIC
+function marble_music() {
+    $marble_music = null;
+    $i = 0;
+    if( have_rows('music', 'option') ):
+        $marble_music .= '<div class="marble-services">';
+        while ( have_rows('music', 'option') ) : the_row();
+            $i++;
+            $service_image = get_sub_field('service_image');
+            $image_size = 'thumb-grid';
+            $image_url = $service_image['sizes'][$image_size];
+            $marble_music .= '<div class="marble-service box'.$i.'">';
+            $marble_music .= '<div class="marble-service-image marble-grid-item" style="background: #226C80 url('.$image_url.') no-repeat center center;background-size:cover">';
+            $marble_music .= '<div class="marble-service-overlay">';
+            $marble_music .= '<div class="marble-service-content">';
+            $marble_music .= '<h3>'.get_sub_field('service_title').'</h3>';
+            $marble_music .= '<p>'.get_sub_field('service_excerpt').'</p>';
+            $marble_music .= '<a href="" class="marble-button">READ MORE</a>';
+            $marble_music .= '</div>';
+            $marble_music .= '</div>';
+            $marble_music .= '<div class="marble-service-main-content" id="box'.$i.'" next-title="'.get_sub_field('service_title').'">';
+            $marble_music .= '<div class="marble-service-main-content-left">';
+            $marble_music .= '<h3>'.get_sub_field('service_title').'</h3>';
+            $marble_music .= get_sub_field('service_description');
+            if(get_sub_field('service_work_link')){
+            $marble_music .= '<div><a href="'.get_sub_field('service_work_link').'" class="marble-button">'.get_sub_field('service_work_link_title').'</a></div>';
+            }
+            $marble_music .= '</div>';
+            $marble_music .= '<div class="marble-service-main-content-right">';
+            $marble_music .= '<div class="marble-service-main-content-close">Close</div>';
+            $marble_music .= '<div class="marble-service-main-content-next">Next</div>';
+            $marble_music .= '<div class="marble-service-main-content-next-title">Music</div>';
+            if(get_sub_field('service_hire_link')){
+            $marble_music .= '<div class="button-hire"><a href="'.get_sub_field('service_hire_link').'" class="marble-button">'.get_sub_field('service_hire_link_title').'</a></div>';
+            }
+            $marble_music .= '</div>';
+            $marble_music .= '</div>';
+            $marble_music .= '</div>';
+            $marble_music .= '</div>';
+            $marble_music .= '<div class="marble-service-content-hook box'.$i.'">';
+            $marble_music .= '</div>';
+        endwhile;
+		$marble_music .= '</div>';
+
+
+
+    endif;
+    return $marble_music;
+}
+add_shortcode('marble-music', 'marble_music');
 
 
 
@@ -497,6 +552,39 @@ wp_reset_postdata();
 return $mp_our_thoughts;
 }
 add_shortcode('mp-our-thoughts', 'mp_our_thoughts');
+
+
+
+
+
+
+
+
+// BLAZIT BLOG CATEGORIES
+function blazit_blog_categories() { 
+// List terms in a given taxonomy using wp_list_categories (also useful as a widget if using a PHP Code plugin)
+$blazit_cat = null;
+$orderby      = 'name'; 
+$show_count   = false;
+$pad_counts   = false;
+$hierarchical = true;
+$title        = '';
+ 
+$args = array(
+  'orderby'      => $orderby,
+  'show_count'   => $show_count,
+  'pad_counts'   => $pad_counts,
+  'hierarchical' => $hierarchical,
+  'title_li'     => $title,
+    'echo'       => false
+);
+$current_cat = null;
+if(is_page('blog')) $current_cat = 'current-cat';
+$blazit_cat = '<div class="blazit-blog-categories"><ul><li class="'.$current_cat.'"><a href="/blog/">All</a></li>'.wp_list_categories($args).'</ul></div>';
+return $blazit_cat;
+}
+add_shortcode('blazit-blog-categories', 'blazit_blog_categories');
+
 
 
 
