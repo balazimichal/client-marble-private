@@ -250,6 +250,58 @@ add_shortcode('marble-music', 'marble_music');
 
 
 
+// MARBLE SERVICES
+function marble_services() {
+    $marble_services = null;
+    $i = 0;
+    if( have_rows('services', 'option') ):
+        $marble_services .= '<div class="marble-services">';
+        while ( have_rows('services', 'option') ) : the_row();
+            $i++;
+            $service_image = get_sub_field('service_image');
+            $image_size = 'thumb-grid';
+            $image_url = $service_image['sizes'][$image_size];
+            $marble_services .= '<div class="marble-service box'.$i.'">';
+            $marble_services .= '<div class="marble-service-image marble-grid-item" style="background: #226C80 url('.$image_url.') no-repeat center center;background-size:cover">';
+            $marble_services .= '<div class="marble-service-overlay">';
+            $marble_services .= '<div class="marble-service-content">';
+            $marble_services .= '<h3>'.get_sub_field('service_title').'</h3>';
+            $marble_services .= '<p>'.get_sub_field('service_excerpt').'</p>';
+            $marble_services .= '<a href="" class="marble-button">'.get_sub_field('expand_button_title').'</a>';
+            $marble_services .= '</div>';
+            $marble_services .= '</div>';
+            $marble_services .= '<div class="marble-service-main-content" id="box'.$i.'" next-title="'.get_sub_field('service_title').'">';
+            $marble_services .= '<div class="marble-service-main-content-left">';
+            $marble_services .= '<h3>'.get_sub_field('service_title').'</h3>';
+            $marble_services .= get_sub_field('service_description');
+            if(get_sub_field('service_work_link')){
+            $marble_services .= '<div><a href="'.get_sub_field('service_work_link').'" class="marble-button">'.get_sub_field('service_work_link_title').'</a></div>';
+            }
+            $marble_services .= '</div>';
+            $marble_services .= '<div class="marble-service-main-content-right">';
+            $marble_services .= '<div class="marble-service-main-content-close">Close</div>';
+            $marble_services .= '<div class="marble-service-main-content-next">Next</div>';
+            $marble_services .= '<div class="marble-service-main-content-next-title">Music</div>';
+            if(get_sub_field('service_hire_link')){
+            $marble_services .= '<div class="button-hire"><a href="'.get_sub_field('service_hire_link').'" class="marble-button">'.get_sub_field('service_hire_link_title').'</a></div>';
+            }
+            $marble_services .= '</div>';
+            $marble_services .= '</div>';
+            $marble_services .= '</div>';
+            $marble_services .= '</div>';
+            $marble_services .= '<div class="marble-service-content-hook box'.$i.'">';
+            $marble_services .= '</div>';
+        endwhile;
+        $marble_services .= '</div>';
+    endif;
+    return $marble_services;
+}
+add_shortcode('marble-services', 'marble_services');
+
+
+
+
+
 
 
 // MARBLE TEAM

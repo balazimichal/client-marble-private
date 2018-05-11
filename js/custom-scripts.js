@@ -9,7 +9,7 @@ jQuery( document ).ready(function() {
   var box_id = "";
   var box_num = "";
 
-  var clearout = \'<div class="marble-service-clearout"></div>\';
+  var clearout = '<div class="marble-service-clearout"></div>';
 
   // CLOSE BUTTON
   jQuery("body").on("click", ".marble-service-main-content-close", function () {
@@ -51,6 +51,7 @@ jQuery( document ).ready(function() {
 
 
   // MARBLE SERVICE BOX
+  console.log("service box ready");
   jQuery(".marble-service .marble-button").click(function (event) {
     event.preventDefault();
     var next_title = "";
