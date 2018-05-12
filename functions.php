@@ -637,6 +637,7 @@ function mp_our_thoughts() {
 	.mp-post h2{margin-bottom:10px;}
 	.mp-post .mp-post-excerpt{margin-bottom:20px;}
 	.mp-pagination span, .mp-pagination a{margin-right:15px;padding:0 20px;height:50px;line-height:50px;text-align:center;display:inline-block;background:#f5f5f5}
+	.mp-pagination .current{background:#86D2DA;}
 	@media (max-width: 1024px) {
 		.mp-blog{margin-left:0%;}
 		.mp-post{width:100%;margin-left:0%;float:none;margin-bottom:100px;}
