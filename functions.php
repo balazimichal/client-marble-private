@@ -151,6 +151,7 @@ add_filter('tg_register_item_skin', function($skins) {
 add_theme_support( 'post-thumbnails' );
 add_image_size( 'thumb-grid', 640, 640, true );
 add_image_size( 'rectangle-grid', 1280, 640, true );
+add_image_size( 'our-thought', 1200, 800, true );
 
 
 
@@ -567,41 +568,88 @@ add_action( 'avada_before_header_wrapper', 'marble_socialbar' );
 
 // OUR THOUGHTS
 function mp_our_thoughts() { 
-$mp_our_thoughts = null;
-$args = array(
-'post_type' => 'our_thoughts',
-'orderby' => 'date',
-'order'   => 'DESC',
-'posts_per_page' => 9,
-);
-// The Query
-$the_query = new WP_Query( $args );    
-// The Loop
-if ( $the_query->have_posts() ) {
-$mp_our_thoughts .= '<div class="blazit-blog">';
-while ( $the_query->have_posts() ) {
-$the_query->the_post();
-    
-$thumb_id = get_post_thumbnail_id();
-$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'blazit-articles', true);
-$thumb_url = $thumb_url_array[0];
-    
-    
-    
-$mp_our_thoughts .= '<div class="blazit-post">';
-$mp_our_thoughts .= '<div class="blazit-post-image"><a href="' . get_permalink() . '"><img src="'.$thumb_url.'" alt="" /></a></div>';
-$mp_our_thoughts .= '<div class="blazit-post-excerpt">';
-$mp_our_thoughts .= '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-$mp_our_thoughts .= get_the_excerpt();
-$mp_our_thoughts .= '<div class="blazit-read-more"><a href="' . get_permalink() . '">Read more</a></div>';
-$mp_our_thoughts .= '</div>';
-$mp_our_thoughts .= '</div>';
-}
-$mp_our_thoughts .= '</div>';
-wp_reset_postdata();
-} 
-    
-return $mp_our_thoughts;
+	$mp_our_thoughts = null;
+	$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+	$args = array(
+	'post_type' => 'our_thoughts',
+	'orderby' => 'date',
+	'order'   => 'DESC',
+	'posts_per_page' => 5,
+	'paged' => $paged,
+	);
+	// The Query
+	$the_query = new WP_Query( $args );    
+	// The Loop
+	if ( $the_query->have_posts() ) {
+	$mp_our_thoughts .= '<div class="mp-blog">';
+	while ( $the_query->have_posts() ) {
+	$the_query->the_post();
+		
+	$thumb_id = get_post_thumbnail_id();
+	$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'our-thought', true);
+	$thumb_url = $thumb_url_array[0];
+
+		
+		
+	$mp_our_thoughts .= '<div class="mp-post">';
+	$mp_our_thoughts .= '<div class="mp-post-image"><a href="' . get_permalink() . '"><img src="'.$thumb_url.'" alt="" /></a></div>';
+	$mp_our_thoughts .= '<div class="mp-post-excerpt">';
+	$mp_our_thoughts .= '<div class="mp-post-date">'.get_the_date();
+	$mp_our_thoughts .= '<span class="fancy-date rotate">THOUGHTS 27.10.2017</span>';
+	$mp_our_thoughts .= '</div>';
+	$mp_our_thoughts .= '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
+	$mp_our_thoughts .= '<div class="mp-post-excerpt">'.get_the_excerpt().'</div>';
+	$mp_our_thoughts .= '<div class="mp-read-more"><a href="' . get_permalink() . '">Read more</a></div>';
+	$mp_our_thoughts .= '</div>';
+	$mp_our_thoughts .= '</div>';
+	}
+	$mp_our_thoughts .= '</div>';
+
+
+
+	$mp_our_thoughts .= '<div class="clear"></div>';
+    $mp_our_thoughts .= '<div class="mp-pagination">';
+    $mp_our_thoughts .= paginate_links( array(
+                'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+                'total'        => $the_query->max_num_pages,
+                'current'      => max( 1, get_query_var( 'paged' ) ),
+                'format'       => '?paged=%#%',
+                'show_all'     => false,
+                'type'         => 'plain',
+                'end_size'     => 2,
+                'mid_size'     => 1,
+                'prev_next'    => true,
+                'prev_text'    => sprintf( '<i></i> %1$s', __( 'First', 'text-domain' ) ),
+                'next_text'    => sprintf( '%1$s <i></i>', __( 'Last', 'text-domain' ) ),
+                'add_args'     => false,
+                'add_fragment' => '',
+				'add_args' =>  true,
+            ) );
+    $mp_our_thoughts .= '</div>';
+	$mp_our_thoughts .= '<style>
+	.mp-blog{margin-left:-10%;}
+	.mp-post{width:40%;margin-left:10%;float:left;margin-bottom:150px;}
+	#wrapper .post-content .mp-post h2{font-size:38px;line-height:68px;}
+	.mp-read-more{font-size:18px;font-family:"spectra-light";text-decoration:underline;}
+	.mp-post .fancy-date{position:absolute;margin-left:-200px;margin-top:-150px;color:#BFBFBF;font-size:16px;}
+	.mp-post .mp-post-image{margin-bottom:50px;}
+	.mp-post .mp-post-date{margin-bottom:10px;}
+	.mp-post h2{margin-bottom:10px;}
+	.mp-post .mp-post-excerpt{margin-bottom:20px;}
+	.mp-pagination span, .mp-pagination a{margin-right:15px;padding:0 20px;height:50px;line-height:50px;text-align:center;display:inline-block;background:#f5f5f5}
+	@media (max-width: 1024px) {
+		.mp-blog{margin-left:0%;}
+		.mp-post{width:100%;margin-left:0%;float:none;margin-bottom:100px;}
+	}
+	
+	</style>';
+
+
+
+	wp_reset_postdata();
+	} 
+		
+	return $mp_our_thoughts;
 }
 add_shortcode('mp-our-thoughts', 'mp_our_thoughts');
 
@@ -612,10 +660,18 @@ add_shortcode('mp-our-thoughts', 'mp_our_thoughts');
 
 
 
-// BLAZIT BLOG CATEGORIES
-function blazit_blog_categories() { 
+
+
+
+
+
+
+
+
+// MARBLE CATEGORIES
+function marble_blog_categories() { 
 // List terms in a given taxonomy using wp_list_categories (also useful as a widget if using a PHP Code plugin)
-$blazit_cat = null;
+$marble_cat = null;
 $orderby      = 'name'; 
 $show_count   = false;
 $pad_counts   = false;
@@ -628,14 +684,40 @@ $args = array(
   'pad_counts'   => $pad_counts,
   'hierarchical' => $hierarchical,
   'title_li'     => $title,
+  	'taxonomy' => 'our_thoughts_category',
     'echo'       => false
 );
 $current_cat = null;
-if(is_page('blog')) $current_cat = 'current-cat';
-$blazit_cat = '<div class="blazit-blog-categories"><ul><li class="'.$current_cat.'"><a href="/blog/">All</a></li>'.wp_list_categories($args).'</ul></div>';
-return $blazit_cat;
+if(is_page('marble-thoughts')) $current_cat = 'current-cat';
+$marble_cat .= '<div class="marble-blog-categories">';
+$marble_cat .= '<span class="mp-cat-about">Have a look at what inspires us and what we are thinking about.</span>';
+$marble_cat .= '<ul>';
+//$marble_cat .= '<li class="'.$current_cat.'"><a href="/blog/">All</a></li>';
+$marble_cat .= wp_list_categories($args);
+$marble_cat .= '</ul>';
+$marble_cat .= '</div>';
+$marble_cat .= '<style>
+.marble-blog-categories{margin-bottom:45px;}
+.marble-blog-categories:after{content: "";display: block;clear: both;}
+.marble-blog-categories ul{margin:0;padding:0;float:right;}
+.marble-blog-categories li{display:inline-block;padding-left:30px;}
+@media (max-width: 1024px) {
+	.mp-cat-about{display:block;margin-bottom:45px;}
+	.marble-blog-categories ul{display:block;margin-bottom:45px;float:none;}
+	.marble-blog-categories ul li{padding-left:0;}
+	.marble-blog-categories ul li a{padding:0 20px;margin-right:15px;height:50px;line-height:50px;text-align:center;background:#f5f5f5;display:inline-block;}
 }
-add_shortcode('blazit-blog-categories', 'blazit_blog_categories');
+</style>';
+return $marble_cat;
+}
+add_shortcode('marble-blog-categories', 'marble_blog_categories');
+
+
+
+
+
+
+
 
 
 
