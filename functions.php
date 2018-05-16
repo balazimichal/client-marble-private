@@ -1394,7 +1394,6 @@ function case_study_gallery() {
                 // third box
                 $case_study_gallery .= '<div class="rectangle three gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image3_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image3_url_rectangle.'">';
                 $case_study_gallery .= '</div>';
-				$case_study_gallery .= '</div>';
 				
                 $case_study_gallery .= '</div>';
                 $case_study_gallery .= '</div>';
@@ -1436,17 +1435,17 @@ function case_study_gallery() {
             }
 		}
 
-		if(get_field('gallery_layout') == 'large'){
+		if(get_field('gallery_rows') == 'video'){
 
 				$case_study_gallery .= '<div class="case-study-gallery one-rows">';
 
                 $case_study_gallery .= '<div class="rectangle one video-item" id="case-study-video" style="background:rgba(216,216,216,0.1) url(\''.$image1_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image1_url_rectangle.'">';
-                if(get_field('add_video')){
+
                 $case_study_gallery .= '<video width="100%" height="auto" preload="auto">
 				<source src="'.get_field('webm').'" type="video/webm">
                 <source src="'.get_field('mp4').'" type="video/mp4"></video>';
                 $case_study_gallery .= '<div class="gallery-video-play-button">PLAY<br/>VIDEO</div>';
-                }
+
 				$case_study_gallery .= '</div>';
 				
 				$case_study_gallery .= '</div>';
