@@ -51,7 +51,6 @@ jQuery( document ).ready(function() {
 
 
   // MARBLE SERVICE BOX
-  console.log("service box ready");
   jQuery(".marble-service .marble-button").click(function (event) {
     event.preventDefault();
     var next_title = "";
@@ -157,6 +156,84 @@ jQuery( document ).ready(function() {
     clearTimeout(doit);
     doit = setTimeout(resizedw, 100);
   };
+
+
+
+
+  // OUR WORK (CASE STUDY) GALLERY
+  jQuery(function () {
+
+    jQuery(".case-study-gallery").append('<img src="" id="preview" style="position:absolute;z-index:99999" width="800" height="600"/>');
+    var $preview = jQuery("#preview");
+
+
+    jQuery(".case-study-gallery .gallery-item").hover(function () {
+      if (jQuery(window).width() > 1024) {
+        $preview.attr("src", jQuery(this).attr("data-thumbnail-src")).show();
+      }
+    }, function () {
+      $preview.attr("src", "").hide();
+    });
+
+  });
+
+  var $mouseX = 0, $mouseY = 0;
+  var $xp = 0, $yp = 0;
+
+  jQuery(".case-study-gallery .gallery-item").mousemove(function (e) {
+    // top right
+    if ((jQuery(window).width() - e.pageX < jQuery(window).width() / 2) && (jQuery(window).height() - e.pageY < jQuery(window).height() / 2)) {
+      $mouseX = e.pageX - 850;
+      $mouseY = e.pageY - 450;
+      //console.log('bottom right');
+      // bottom right
+    } else if ((jQuery(window).width() - e.pageX > jQuery(window).width() / 2) && (jQuery(window).height() - e.pageY > jQuery(window).height() / 2)) {
+      $mouseX = e.pageX + 50;
+      $mouseY = e.pageY + 50;
+      //console.log('top left');
+    } else if ((jQuery(window).width() - e.pageX < jQuery(window).width() / 2) && (jQuery(window).height() - e.pageY > jQuery(window).height() / 2)) {
+      $mouseX = e.pageX - 850;
+      $mouseY = e.pageY + 50;
+      //console.log('top right');
+    } else if ((jQuery(window).width() - e.pageX > jQuery(window).width() / 2) && (jQuery(window).height() - e.pageY < jQuery(window).height() / 2)) {
+      $mouseX = e.pageX + 50;
+      $mouseY = e.pageY - 450;
+      //console.log('bottom left');
+    }
+
+  });
+
+  var $loop = setInterval(function () {
+    // change 12 to alter damping higher is slower
+    $xp += (($mouseX - $xp) / 12);
+    $yp += (($mouseY - $yp) / 12);
+    jQuery("#preview").css({ left: $xp + "px", top: $yp + "px" });
+  }, 5);
+
+
+  // GALLERY VIDEO PLAY BUTTON
+  jQuery('.gallery-video-play-button').click(function () {
+    if (jQuery(".case-study-gallery .video-item video").get(0).paused == false) {
+      jQuery(".case-study-gallery .video-item video").get(0).pause();
+    } else {
+      jQuery(".case-study-gallery .video-item video").get(0).play();
+      jQuery('.gallery-video-play-button').fadeOut();
+    }
+  });
+
+  // PAUSE VIDEO ON CLICK
+  jQuery('.case-study-gallery .video-item video').click(function () {
+    jQuery(".case-study-gallery .video-item video").get(0).pause();
+    jQuery('.gallery-video-play-button').fadeIn();
+  });
+
+  // DETECT WHEN VIDEO FINISHED PLAYING AND DISPLAY PLAY BUTTON
+  jQuery('.case-study-gallery .video-item video').on('ended', function () {
+    jQuery('.gallery-video-play-button').fadeIn();
+  });
+
+
+
 
 
 

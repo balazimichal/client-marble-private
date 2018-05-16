@@ -1142,3 +1142,253 @@ add_shortcode('marble-footer', 'marble_footer');
 
 
 
+
+
+// CASE STUDY GALLERY
+function case_study_gallery() {
+    if(is_singular('our_work')){
+    $case_study_gallery = null;
+    $image1 = get_field('gallery_image1');
+    $image2 = get_field('gallery_image2');
+    $image3 = get_field('gallery_image3');
+    $image4 = get_field('gallery_image4');
+    $image5 = get_field('gallery_image5');
+    $image6 = get_field('gallery_image6');
+    $image7 = get_field('gallery_image7');
+    $image8 = get_field('gallery_image8');
+    $image9 = get_field('gallery_image9');
+    $image_square = 'thumb-grid';
+    $image_rectangle = 'rectangle-grid';
+    $image1_url_square = $image1['sizes'][$image_square];
+    $image1_url_rectangle = $image1['sizes'][$image_rectangle];
+    $image2_url_square = $image2['sizes'][$image_square];
+    $image2_url_rectangle = $image2['sizes'][$image_rectangle];
+    $image3_url_square = $image3['sizes'][$image_square];
+    $image3_url_rectangle = $image3['sizes'][$image_rectangle];
+    $image4_url_square = $image4['sizes'][$image_square];
+    $image4_url_rectangle = $image4['sizes'][$image_rectangle];
+    $image5_url_square = $image5['sizes'][$image_square];
+    $image5_url_rectangle = $image5['sizes'][$image_rectangle];
+    $image6_url_square = $image6['sizes'][$image_square];
+    $image6_url_rectangle = $image6['sizes'][$image_rectangle];
+    $image7_url_square = $image7['sizes'][$image_square];
+    $image7_url_rectangle = $image7['sizes'][$image_rectangle];
+    $image8_url_square = $image8['sizes'][$image_square];
+    $image8_url_rectangle = $image8['sizes'][$image_rectangle];
+    $image9_url_square = $image9['sizes'][$image_square];
+    $image9_url_rectangle = $image9['sizes'][$image_rectangle];
+        if(get_field('gallery_rows') == 'video'){
+            $case_study_gallery .= '<div class="case-study-gallery video-row">';
+            $case_study_gallery .= '<div class="square one">';
+            $case_study_gallery .= '<h1>'.get_the_title().'</h1>';
+            if(get_field('client')){
+            $case_study_gallery .= '<div class="client"><strong>Client:</strong> '.get_field('client').'</div>';
+            }
+            if(get_field('services')){
+            $case_study_gallery .= '<div class="services"><strong>Services:</strong> '.get_field('services').'</div>';
+            }
+            $case_study_gallery .= '</div>';
+                $case_study_gallery .= '<div class="video-large video-item" id="case-study-video" style="background:rgba(216,216,216,0.1) url(\''.$image6_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image6_url_rectangle.'">';
+                if(get_field('add_video')){
+                $case_study_gallery .= '<video width="100%" height="auto" preload="auto">
+				<source src="'.get_field('webm').'" type="video/webm">
+                <source src="'.get_field('mp4').'" type="video/mp4">
+																	</video>';
+                $case_study_gallery .= '<div class="gallery-video-play-button">PLAY<br/>VIDEO</div>';
+                }
+                $case_study_gallery .= '</div>';
+            $case_study_gallery .= '</div>';
+        }
+        if(get_field('gallery_rows') == 'one'){
+            $case_study_gallery .= '<div class="case-study-gallery one-row">';
+            $case_study_gallery .= '<div class="case-study-gallery-row first-row">';
+            // first box
+            $case_study_gallery .= '<div class="square one">';
+            $case_study_gallery .= '<h1>'.get_the_title().'</h1>';
+            if(get_field('client')){
+            $case_study_gallery .= '<div class="client"><strong>Client:</strong> '.get_field('client').'</div>';
+            }
+            if(get_field('services')){
+            $case_study_gallery .= '<div class="services"><strong>Services:</strong> '.get_field('services').'</div>';
+            }
+            $case_study_gallery .= '</div>';
+            // second box
+            $case_study_gallery .= '<div class="square two gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image1_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image1_url_rectangle.'">';
+            $case_study_gallery .= '</div>';
+            // third box
+            $case_study_gallery .= '<div class="square three gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image2_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image2_url_rectangle.'">';
+            $case_study_gallery .= '</div>';
+            // fourth box
+            $case_study_gallery .= '<div class="square four gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image3_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image3_url_rectangle.'">';
+            $case_study_gallery .= '</div>';
+            // fifth box
+            $case_study_gallery .= '<div class="square five gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image4_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image4_url_rectangle.'">';
+            $case_study_gallery .= '</div>';
+            $case_study_gallery .= '</div>';
+            $case_study_gallery .= '</div>';
+        }
+        if(get_field('gallery_rows') == 'two'){
+            if(get_field('gallery_layout') == 'small'){
+                $case_study_gallery .= '<div class="case-study-gallery two-rows">';
+                $case_study_gallery .= '<div class="case-study-gallery-row first-row">';
+                // first box
+                $case_study_gallery .= '<div class="square one">';
+                $case_study_gallery .= '<h1>'.get_the_title().'</h1>';
+                if(get_field('client')){
+                $case_study_gallery .= '<div class="client"><strong>Client:</strong> '.get_field('client').'</div>';
+                }
+                if(get_field('services')){
+                $case_study_gallery .= '<div class="services"><strong>Services:</strong> '.get_field('services').'</div>';
+                }
+                $case_study_gallery .= '</div>';
+                // second box
+                $case_study_gallery .= '<div class="square two gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image1_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image1_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // third box
+                $case_study_gallery .= '<div class="square three gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image2_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image2_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // fourth box
+                $case_study_gallery .= '<div class="square four gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image3_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image3_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // fifth box
+                $case_study_gallery .= '<div class="square five gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image4_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image4_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '<div class="case-study-gallery-row second-row">';
+                // sixth box
+                $case_study_gallery .= '<div class="square six gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image5_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image5_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // seventh box
+                $case_study_gallery .= '<div class="square seven gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image6_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image6_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // eight box
+                $case_study_gallery .= '<div class="square eight gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image7_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image7_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // ninth box
+                $case_study_gallery .= '<div class="square nine gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image8_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image8_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // tenth box
+                $case_study_gallery .= '<div class="square ten desktop gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image9_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image9_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '<div class="rectangle ten mobile gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image9_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image9_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '</div>';
+            }
+            if(get_field('gallery_layout') == 'large'){
+                $case_study_gallery .= '<div class="case-study-gallery two-rows ';
+                if(get_field('add_video')) {
+                $case_study_gallery .= 'video-added';
+                }
+                $case_study_gallery .= '">';
+                $case_study_gallery .= '<div class="case-study-gallery-row first-row">';
+                // first box
+                $case_study_gallery .= '<div class="square one">';
+                $case_study_gallery .= '<h1>'.get_the_title().'</h1>';
+                if(get_field('client')){
+                $case_study_gallery .= '<div class="client"><strong>Client:</strong> '.get_field('client').'</div>';
+                }
+                if(get_field('services')){
+                $case_study_gallery .= '<div class="services"><strong>Services:</strong> '.get_field('services').'</div>';
+                }
+                $case_study_gallery .= '</div>';
+                // second box
+                $case_study_gallery .= '<div class="square two desktop gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image1_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image1_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '<div class="rectangle two mobile gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image1_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image1_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // third box
+                $case_study_gallery .= '<div class="rectangle three desktop gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image2_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image2_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // third box
+                $case_study_gallery .= '<div class="square three mobile gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image2_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image2_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // fourth box
+                $case_study_gallery .= '<div class="square four gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image3_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image3_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '<div class="case-study-gallery-row second-row">';
+                // fifth box
+                $case_study_gallery .= '<div class="square five desktop gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image4_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image4_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '<div class="rectangle five mobile gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image4_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image4_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // sixth box
+                $case_study_gallery .= '<div class="square six gallery-item ';
+                if(get_field('add_video')) {
+                    $case_study_gallery .= 'desktop';
+                }
+                $case_study_gallery .= '" style="background:rgba(216,216,216,0.1) url(\''.$image5_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image5_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                // seventh box
+                $case_study_gallery .= '<div class="rectangle seven ';
+                if(get_field('add_video')) {
+                    $case_study_gallery .= 'video-item';
+                } else {
+                    $case_study_gallery .= 'gallery-item desktop';
+                }
+                $case_study_gallery .= '" id="case-study-video" style="background:rgba(216,216,216,0.1) url(\''.$image6_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image6_url_rectangle.'">';
+                if(get_field('add_video')){
+                $case_study_gallery .= '<video width="100%" height="auto" preload="auto">
+				<source src="'.get_field('webm').'" type="video/webm">
+                <source src="'.get_field('mp4').'" type="video/mp4"></video>';
+                $case_study_gallery .= '<div class="gallery-video-play-button">PLAY<br/>VIDEO</div>';
+                }
+                $case_study_gallery .= '</div>';
+                if(!get_field('add_video')) {
+                $case_study_gallery .= '<div class="square seven mobile gallery-item ';
+                $case_study_gallery .= '" style="background:rgba(216,216,216,0.1) url(\''.$image6_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image6_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                }
+                // eight box
+                $case_study_gallery .= '<div class="square eight desktop gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image7_url_square.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image7_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '<div class="rectangle eight mobile gallery-item" style="background:rgba(216,216,216,0.1) url(\''.$image7_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image7_url_rectangle.'">';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '</div>';
+                $case_study_gallery .= '</div>';
+            }
+		}
+		
+		$case_study_gallery .= '<style>
+		/* CASE STUDY GALLER - GENERAL STYLES */
+		.case-study-gallery .mobile{display:none;}
+		.case-study-gallery .desktop{display:block;}
+		.case-study-gallery h1{font-size:46px;line-height:54px;margin-bottom:30px;margin-top:30px;}
+		.case-study-gallery .client{margin-bottom:30px;}
+		.case-study-gallery .square{width:20%;height:260px;float:left;background:rgba(216,216,216,0.1);overflow:hidden;}
+		.case-study-gallery .rectangle{width:40%;height:260px;float:left;background:rgba(216,216,216,0.1);overflow:hidden;}
+		.case-study-gallery .square.one{padding:0 30px;overflow:hidden;}
+		.case-study-gallery .video-large{width:80%;min-height:400px;float:left;}
+		.case-study-gallery.video-row{overflow:hidden;}
+		.case-study-gallery .video-item{position:relative;}
+		.gallery-video-play-button{display:block;width:120px;height:120px;background:#F47E76;color:#fff;position:absolute;top:50%;left:50%;margin-top:-60px;margin-left:-60px;z-index:9999;font-size:14px;text-align:center;-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;border-radius: 50%;cursor:pointer;display:table-cell;padding-top:30px;}
+		.case-study-gallery:after{content: "";display: block;clear: both;}
+		@media only screen and (max-width: 1800px) {
+		.case-study-gallery h1{font-size:32px;line-height:42px;margin-bottom:20px;}
+		}
+		@media only screen and (max-width: 1440px) {
+		.case-study-gallery h1{font-size:23px;line-height:27px;margin-bottom:10px;}
+		.case-study-gallery .client{margin-bottom:10px;font-size:14px;}
+		.case-study-gallery .services{font-size:14px;margin-bottom:30px;}   
+		}
+		@media only screen and (max-width: 1023px) {
+		.case-study-gallery .mobile{display:block;}
+		.case-study-gallery .desktop{display:none;}
+		.case-study-gallery .square.one{width:100%;float:none;height:auto !imortant;}
+		.case-study-gallery .square{width:50%;}
+		.case-study-gallery .rectangle{width:100%;}
+		.case-study-gallery .video-large{width:100%;min-height:auto;}
+		}
+		</style>';
+
+
+
+
+        return $case_study_gallery;
+    }
+}
+add_shortcode('case-study-gallery', 'case_study_gallery');
+
+

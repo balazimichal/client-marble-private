@@ -26,10 +26,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="our-work-titlebar mp-menu-space">
 					<h1 class="mp-title"><?php echo get_the_title(); ?></h1>
 					<p class="services"><?php echo get_field('services'); ?></p>
+					<?php echo do_shortcode('[case-study-gallery]'); ?>
 				</div>
 
-				<div class="our-work-gallery mp-menu-space">
-				</div>
+
+					
+
 
 				
 				<div class="our-work-content">
