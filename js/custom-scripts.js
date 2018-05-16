@@ -126,10 +126,10 @@ jQuery( document ).ready(function() {
     jQuery('.marble-service-content-hook').hide();
 
     // GALLERY ITEMS
-    var csm = jQuery(".case-study-gallery-row .square.three").outerWidth();
+    var csm = jQuery(".case-study-gallery-row .square.one").outerWidth();
     var vsm = jQuery(".case-study-gallery .square.one").outerWidth();
     if (jQuery('body').width() < 1024) {
-      var csm = jQuery(".case-study-gallery-row .square.three").outerWidth() / 2;
+      var csm = jQuery(".case-study-gallery-row .square.one").outerWidth() / 2;
       var vsm = jQuery(".case-study-gallery .square.one").outerWidth() / 2;
     }
 
@@ -141,8 +141,9 @@ jQuery( document ).ready(function() {
     jQuery(".case-study-gallery.video-row .video-item").height(vsm * 2);
     //console.log(vsm);
     if (jQuery('body').width() < 1024) {
-      jQuery(".case-study-gallery-row .square.one").css('height', 'auto');
+
       jQuery(".case-study-gallery .video-large").css('height', 'auto');
+      jQuery(".case-study-gallery-row .square").height(csm * 2);
       jQuery(".case-study-gallery-row .rectangle").height(csm * 2);
 
 

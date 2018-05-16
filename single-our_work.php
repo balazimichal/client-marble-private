@@ -34,31 +34,65 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 				
-				<div class="our-work-content">
-					<?php the_content(); ?>
-				</div>
+				<?php if(get_field('turn_on_section')){ ?>
+					<div class="our-work-content">
+						<?php the_content(); ?>
+					</div>
+				<?php } ?>
 
-				<div class="our-work-featured">
-					<?php echo get_the_post_thumbnail( get_the_ID(), 'rectangle-grid' ); ?>
-				</div>
 
+
+
+				<?php if(get_field('turn_on_bottom_banner')){
+					echo '<section class="our-work-featured" style="background:#226C80 url('. get_field('bottom_banner') .') no-repeat center center;background-size:cover;"><div class="case-study-banner-overlay"></div></section>';
+				} ?>
+
+
+
+
+
+				<?php if(get_field('turn_on_testimonials')){ ?>
 				<div class="our-work-testimonial">
-					<h3>Testimonials</h3>
-					<blockquote>
-						<p><?php echo get_field('testimonial'); ?></p>
-						<p class="person"><?php echo get_field('testimonial_person'); ?></p>
-					</blockquote>
-				</div>
+						<h3>Testimonials</h3>
+                        <div class="flexslider">
+                          <ul class="slides">
+                                <?php      
+                                if( have_rows('testimonials') ):
+                                while ( have_rows('testimonials') ) : the_row();  
+                                ?> 
+                                    <li>
+                                        <blockquote>
+											<p>“<?php echo get_sub_field('testimonial'); ?>”</p>
+											<p class="person"><?php echo get_sub_field('testimonial_name'); ?></p>
+										</blockquote>
+                                    </li>
+                                <?php
+                                    endwhile;
+                                    endif;
+                                ?>
+
+                          </ul>
+                        </div>
+                    </div>
+                <?php } ?>
+
+
+
+
+
+
 
 				<div class="our-work-social">
 					<?php echo marble_social(); ?>
 				</div>
 
+				
+				<?php if(get_field('turn_on_similar_projects')){ ?>
 				<div class="our-work-similar-projects">
 					<h3>Similar Projects</h3>
 					<?php marble_similar_projects(); ?>
-
 				</div>
+			    <?php } ?>
 
 			</div>
 
