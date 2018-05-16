@@ -152,6 +152,7 @@ add_theme_support( 'post-thumbnails' );
 add_image_size( 'thumb-grid', 640, 640, true );
 add_image_size( 'rectangle-grid', 1280, 640, true );
 add_image_size( 'our-thought', 1200, 800, true );
+add_image_size( 'mp-rectangle', 800, 600, true );
 
 
 
@@ -756,6 +757,58 @@ return $marble_cat;
 add_shortcode('marble-blog-categories', 'marble_blog_categories');
 
 
+
+
+
+
+
+// MARBLE RELATED
+function marble_similar_projects() {
+
+	$similar_project_id_1 = get_field('related_project_1');
+	$similar_project_id_2 = get_field('related_project_2');
+	$similar_project_id_3 = get_field('related_project_3');
+	$featured_img_url_1 = get_the_post_thumbnail_url($similar_project_id_1,'mp-rectangle'); 
+	$featured_img_url_2 = get_the_post_thumbnail_url($similar_project_id_2,'mp-rectangle'); 
+	$featured_img_url_3 = get_the_post_thumbnail_url($similar_project_id_3,'mp-rectangle'); 
+
+	$marble_similar_projects = null;
+	
+	$marble_similar_projects = '<div class="mp-similar-projects">';
+
+	$marble_similar_projects .= '<div class="mp-similar-project">';
+	$marble_similar_projects .= '<img src="'.$featured_img_url_1.'" alt="" />';
+	$marble_similar_projects .= '<h4>'.get_the_title($similar_project_id_1).'<h4>';
+	$marble_similar_projects .= '<h5>'.get_field('client', $similar_project_id_1).'</h5>';
+	$marble_similar_projects .= '</div>';
+
+	$marble_similar_projects .= '<div class="mp-similar-project">';
+	$marble_similar_projects .= '<img src="'.$featured_img_url_2.'" alt="" />';
+	$marble_similar_projects .= '<h4>'.get_the_title($similar_project_id_2).'</h4>';
+	$marble_similar_projects .= '<h5>'.get_field('client', $similar_project_id_2).'</h5>';
+	$marble_similar_projects .= '</div>';
+
+	$marble_similar_projects .= '<div class="mp-similar-project">';
+	$marble_similar_projects .= '<img src="'.$featured_img_url_3.'" alt="" />';
+	$marble_similar_projects .= '<h4>'.get_the_title($similar_project_id_3).'<h4>';
+	$marble_similar_projects .= '<h5>'.get_field('client', $similar_project_id_3).'</h5>';
+	$marble_similar_projects .= '</div>';
+
+	$marble_similar_projects .= '</div>';
+
+	$marble_similar_projects .= '<style>
+	.mp-similar-projects{margin-left:-3.33%;border-top:1px solid #ddd;padding:100px 0 50px;}
+	.mp-similar-projects:after{content: "";display: block;clear: both;}
+	.mp-similar-project{float:left;width:30%;margin-left:3.33%;margin-bottom:50px;}
+	.mp-similar-project img{margin-bottom:40px;}
+	@media (max-width: 800px) {
+		.mp-similar-projects{margin-left:0;}
+		.mp-similar-project{float:none;width:100%;margin-left:0;}
+	}
+	</style>';
+
+	echo $marble_similar_projects;
+}
 
 
 

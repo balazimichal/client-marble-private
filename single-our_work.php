@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 
 				<div class="our-work-featured">
-					<?php echo get_the_post_thumbnail( get_the_ID(), 'full' ); ?>
+					<?php echo get_the_post_thumbnail( get_the_ID(), 'rectangle-grid' ); ?>
 				</div>
 
 				<div class="our-work-testimonial">
@@ -54,8 +54,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<div class="our-work-similar-projects">
 					<h3>Similar Projects</h3>
-					<div class="our-work-similar-project-list">
-					</div>
+					<?php marble_similar_projects(); ?>
+
 				</div>
 
 			</div>
