@@ -562,6 +562,19 @@ add_action( 'avada_before_header_wrapper', 'marble_socialbar' );
 
 
 
+// CUSTOM EXCERPT LENGTH
+function get_excerpt($limit, $source = null){
+
+    if($source == "content" ? ($excerpt = get_the_content()) : ($excerpt = get_the_excerpt()));
+    $excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
+    $excerpt = strip_shortcodes($excerpt);
+    $excerpt = strip_tags($excerpt);
+    $excerpt = substr($excerpt, 0, $limit);
+    $excerpt = substr($excerpt, 0, strripos($excerpt, " "));
+    $excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
+    //$excerpt = $excerpt.'... <a href="'.get_permalink($post->ID).'">more</a>';
+    return $excerpt;
+}
 
 
 
@@ -569,13 +582,28 @@ add_action( 'avada_before_header_wrapper', 'marble_socialbar' );
 // OUR THOUGHTS
 function mp_our_thoughts() { 
 	$mp_our_thoughts = null;
+
+	$current_term_arguments = '';
+	if(is_category() || is_tax() || is_tag() )  {
+			$current_term = get_queried_object_id();
+			$current_term_arguments = array(
+											array(
+												'taxonomy' => 'our_thoughts_category',
+												'field' => 'term_id',
+												'terms' => $current_term
+											)
+										);
+	}
+
 	$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 	$args = array(
 	'post_type' => 'our_thoughts',
+	'post_status' => 'publish',
 	'orderby' => 'date',
 	'order'   => 'DESC',
-	'posts_per_page' => 5,
+	'posts_per_page' => 9,
 	'paged' => $paged,
+	'tax_query' => $current_term_arguments,
 	);
 	// The Query
 	$the_query = new WP_Query( $args );    
@@ -588,17 +616,20 @@ function mp_our_thoughts() {
 	$thumb_id = get_post_thumbnail_id();
 	$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'our-thought', true);
 	$thumb_url = $thumb_url_array[0];
+		
+	if( $the_query->current_post == 0 && !is_paged() ) {
+		$mp_our_thoughts .= '<div class="mp-post first-post">';
+	} else {
+		$mp_our_thoughts .= '<div class="mp-post">';
+	}
 
-		
-		
-	$mp_our_thoughts .= '<div class="mp-post">';
 	$mp_our_thoughts .= '<div class="mp-post-image"><a href="' . get_permalink() . '"><img src="'.$thumb_url.'" alt="" /></a></div>';
 	$mp_our_thoughts .= '<div class="mp-post-excerpt">';
 	$mp_our_thoughts .= '<div class="mp-post-date">'.get_the_date();
-	$mp_our_thoughts .= '<span class="fancy-date rotate">THOUGHTS 27.10.2017</span>';
+	$mp_our_thoughts .= '<span class="fancy-date rotate">'.get_the_date().'</span>';
 	$mp_our_thoughts .= '</div>';
 	$mp_our_thoughts .= '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-	$mp_our_thoughts .= '<div class="mp-post-excerpt">'.get_the_excerpt().'</div>';
+	$mp_our_thoughts .= '<div class="mp-post-excerpt">'.get_excerpt(120).'</div>';
 	$mp_our_thoughts .= '<div class="mp-read-more"><a href="' . get_permalink() . '">Read more</a></div>';
 	$mp_our_thoughts .= '</div>';
 	$mp_our_thoughts .= '</div>';
@@ -629,6 +660,7 @@ function mp_our_thoughts() {
 	$mp_our_thoughts .= '<style>
 	.mp-blog{margin-left:-10%;}
 	.mp-post{width:40%;margin-left:10%;float:left;margin-bottom:150px;}
+	.mp-post.first-post{width:90%;margin-left:10%;float:none;}
 	#wrapper .post-content .mp-post h2{font-size:38px;line-height:68px;}
 	.mp-read-more{font-size:18px;font-family:"spectra-light";text-decoration:underline;}
 	.mp-post .fancy-date{position:absolute;margin-left:-200px;margin-top:-150px;color:#BFBFBF;font-size:16px;}
@@ -638,9 +670,13 @@ function mp_our_thoughts() {
 	.mp-post .mp-post-excerpt{margin-bottom:20px;}
 	.mp-pagination span, .mp-pagination a{margin-right:15px;padding:0 20px;height:50px;line-height:50px;text-align:center;display:inline-block;background:#f5f5f5}
 	.mp-pagination .current{background:#86D2DA;}
+	@media (max-width: 1440px) {
+		.mp-post .fancy-date{margin-left:-130px;margin-top:-100px;}
+	}
 	@media (max-width: 1024px) {
 		.mp-blog{margin-left:0%;}
 		.mp-post{width:100%;margin-left:0%;float:none;margin-bottom:100px;}
+
 	}
 	
 	</style>';
@@ -671,6 +707,10 @@ add_shortcode('mp-our-thoughts', 'mp_our_thoughts');
 
 // MARBLE CATEGORIES
 function marble_blog_categories() { 
+
+
+
+
 // List terms in a given taxonomy using wp_list_categories (also useful as a widget if using a PHP Code plugin)
 $marble_cat = null;
 $orderby      = 'name'; 
@@ -689,20 +729,22 @@ $args = array(
     'echo'       => false
 );
 $current_cat = null;
-if(is_page('marble-thoughts')) $current_cat = 'current-cat';
+if(is_page('marbled-thoughts')) $current_cat = 'current-cat';
 $marble_cat .= '<div class="marble-blog-categories">';
 $marble_cat .= '<span class="mp-cat-about">Have a look at what inspires us and what we are thinking about.</span>';
 $marble_cat .= '<ul>';
-//$marble_cat .= '<li class="'.$current_cat.'"><a href="/blog/">All</a></li>';
+$marble_cat .= '<li class="'.$current_cat.'"><a href="/marble-private/marbled-thoughts/">All</a></li>';
 $marble_cat .= wp_list_categories($args);
 $marble_cat .= '</ul>';
 $marble_cat .= '</div>';
+
 $marble_cat .= '<style>
 .marble-blog-categories{margin-bottom:45px;}
 .marble-blog-categories:after{content: "";display: block;clear: both;}
 .marble-blog-categories ul{margin:0;padding:0;float:right;}
 .marble-blog-categories li{display:inline-block;padding-left:30px;}
-@media (max-width: 1024px) {
+.marble-blog-categories li.current-cat a{font-weight:bold;}
+@media (max-width: 1080px) {
 	.mp-cat-about{display:block;margin-bottom:45px;}
 	.marble-blog-categories ul{display:block;margin-bottom:45px;float:none;}
 	.marble-blog-categories ul li{padding-left:0;}
@@ -719,8 +761,33 @@ add_shortcode('marble-blog-categories', 'marble_blog_categories');
 
 
 
+// CUSTOM POST TYPE HIGHLIGHT MENU ITEM
+/*
+  add_action('nav_menu_css_class', 'add_current_nav_class', 10, 2 );
 
 
+	
+	function add_current_nav_class($classes, $item) {
+		
+		// Getting the current post details
+		$taxonomy = get_query_var('taxonomy');
+		if($taxonomy=='our_thoughts_category') {$current_post_type_slug = 'marbled-thoughts';}
+			
+		// Getting the URL of the menu item
+		$menu_slug = strtolower(trim($item->url));
+		
+		// If the menu item URL contains the current post types slug add the current-menu-item class
+		if (strpos($menu_slug,$current_post_type_slug) !== false) {
+		
+		   $classes[] = 'current-menu-item';
+		
+		}
+		
+		// Return the corrected set of classes to be added to the menu item
+		return $classes;
+	
+	}
+*/
 
 
 
