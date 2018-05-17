@@ -613,19 +613,18 @@ function mp_our_thoughts() {
 	$mp_our_thoughts .= '<div class="mp-blog">';
 	while ( $the_query->have_posts() ) {
 	$the_query->the_post();
-		
-	$thumb_id = get_post_thumbnail_id();
-	$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'our-thought', true);
-	$thumb_url = $thumb_url_array[0];
+
 		
 	if( $the_query->current_post == 0 && !is_paged() ) {
 		$mp_our_thoughts .= '<div class="mp-post first-post">';
+		$mp_our_thoughts .= '<div class="mp-post-image"><a href="' . get_permalink() . '">'.get_the_post_thumbnail(get_the_ID(),array( 1200, 600)).'</a></div>';
 	} else {
 		$mp_our_thoughts .= '<div class="mp-post">';
+		$mp_our_thoughts .= '<div class="mp-post-image"><a href="' . get_permalink() . '">'.get_the_post_thumbnail(get_the_ID(),array( 800, 600)).'</a></div>';
 	}
 
-	$mp_our_thoughts .= '<div class="mp-post-image"><a href="' . get_permalink() . '"><img src="'.$thumb_url.'" alt="" /></a></div>';
-	$mp_our_thoughts .= '<div class="mp-post-excerpt">';
+	
+	$mp_our_thoughts .= '<div class="mp-post-content">';
 	$mp_our_thoughts .= '<div class="mp-post-date">'.get_the_date();
 	$mp_our_thoughts .= '<span class="fancy-date rotate">'.get_the_date().'</span>';
 	$mp_our_thoughts .= '</div>';
@@ -660,24 +659,27 @@ function mp_our_thoughts() {
     $mp_our_thoughts .= '</div>';
 	$mp_our_thoughts .= '<style>
 	.mp-blog{margin-left:-10%;}
-	.mp-post{width:40%;margin-left:10%;float:left;margin-bottom:150px;}
+	.mp-post{width:40%;margin-left:10%;float:left;margin-bottom:65px;}
 	.mp-post.first-post{width:90%;margin-left:10%;float:none;}
 	#wrapper .post-content .mp-post h2{font-size:38px;line-height:68px;}
 	.mp-read-more{font-size:18px;font-family:"spectra-light";text-decoration:underline;}
-	.mp-post .fancy-date{position:absolute;margin-left:-200px;margin-top:-150px;color:#BFBFBF;font-size:16px;}
-	.mp-post .mp-post-image{margin-bottom:50px;}
+	.mp-post .fancy-date{position:absolute;margin-left:-175px;margin-top:-100px;color:#BFBFBF;font-size:16px;}
+	.mp-post.first-post .mp-post-image{max-height:600px;overflow:hidden;}
+	.mp-post .mp-post-image{margin-bottom:50px;max-width:800px;max-height:600px;overflow:hidden;}
 	.mp-post .mp-post-date{margin-bottom:10px;}
 	.mp-post h2{margin-bottom:10px;}
 	.mp-post .mp-post-excerpt{margin-bottom:20px;}
+	.mp-post .mp-post-content{height:250px;overflow:hidden;}
 	.mp-pagination span, .mp-pagination a{margin-right:15px;padding:0 20px;height:50px;line-height:50px;text-align:center;display:inline-block;background:#f5f5f5}
 	.mp-pagination .current{background:#86D2DA;}
 	@media (max-width: 1440px) {
 		.mp-post .fancy-date{margin-left:-130px;margin-top:-100px;}
 	}
 	@media (max-width: 1024px) {
+		.mp-post.first-post{margin-left:0;width:100%;}
 		.mp-blog{margin-left:0%;}
 		.mp-post{width:100%;margin-left:0%;float:none;margin-bottom:100px;}
-
+		.mp-post .fancy-date{display:none}
 	}
 	
 	</style>';
@@ -749,7 +751,7 @@ $marble_cat .= '<style>
 	.mp-cat-about{display:block;margin-bottom:45px;}
 	.marble-blog-categories ul{display:block;margin-bottom:45px;float:none;}
 	.marble-blog-categories ul li{padding-left:0;}
-	.marble-blog-categories ul li a{padding:0 20px;margin-right:15px;height:50px;line-height:50px;text-align:center;background:#f5f5f5;display:inline-block;}
+	.marble-blog-categories ul li a{padding:0 20px;margin-right:15px;margin-bottom:15px;height:50px;line-height:50px;text-align:center;background:#f5f5f5;display:inline-block;}
 }
 </style>';
 return $marble_cat;
@@ -1366,6 +1368,7 @@ function case_study_gallery() {
 		$image4 = get_field('gallery_image4');
 		$image5 = get_field('gallery_image5');
 		$image6 = get_field('gallery_image6');
+		$video_image = get_field('video_image');
 		$image_square = 'thumb-grid';
 		$image_rectangle = 'rectangle-grid';
 		$image1_url_square = $image1['sizes'][$image_square];
@@ -1439,9 +1442,9 @@ function case_study_gallery() {
 
 				$case_study_gallery .= '<div class="case-study-gallery one-rows">';
 
-                $case_study_gallery .= '<div class="rectangle one video-item" id="case-study-video" style="background:rgba(216,216,216,0.1) url(\''.$image1_url_rectangle.'\') no-repeat center center;background-size:cover" data-thumbnail-src="'.$image1_url_rectangle.'">';
+                $case_study_gallery .= '<div class="video-item" id="case-study-video">';
 
-                $case_study_gallery .= '<video width="100%" height="auto" preload="auto">
+                $case_study_gallery .= '<video width="100%" height="auto" preload="auto" poster="'.$video_image.'">
 				<source src="'.get_field('webm').'" type="video/webm">
                 <source src="'.get_field('mp4').'" type="video/mp4"></video>';
                 $case_study_gallery .= '<div class="gallery-video-play-button">PLAY<br/>VIDEO</div>';
@@ -1474,8 +1477,8 @@ function case_study_gallery() {
 		.case-study-gallery .video-large{width:75%;min-height:400px;float:left;}
 		.case-study-gallery.video-row{overflow:hidden;}
 		.case-study-gallery .video-item{position:relative;}
-		.gallery-video-play-button{display:block;width:120px;height:120px;background:#F47E76;color:#fff;position:absolute;top:50%;left:50%;margin-top:-60px;margin-left:-60px;z-index:9999;font-size:14px;text-align:center;-webkit-border-radius: 50%;
-		-moz-border-radius: 50%;border-radius: 50%;cursor:pointer;display:table-cell;padding-top:30px;}
+		.gallery-video-play-button{display:block;width:120px;height:120px;background:#F47E76;color:#fff;position:absolute;top:50%;left:50%;margin-top:-60px;margin-left:-60px;z-index:99;font-size:14px;text-align:center;-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;border-radius: 50%;cursor:pointer;display:table-cell;padding-top:35px;}
 		.case-study-gallery:after{content: "";display: block;clear: both;}
 
 

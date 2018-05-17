@@ -23,10 +23,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			
 			<div class="post-content">
-				<div class="our-work-titlebar mp-menu-space">
-					<h1 class="mp-title"><?php echo get_the_title(); ?></h1>
-					<p class="services"><?php echo get_field('services'); ?></p>
-					<?php echo do_shortcode('[case-study-gallery]'); ?>
+				<div class="mp-menu-space">
+					<div class="our-work-titlebar">
+						<h1 class="mp-title"><?php echo get_the_title(); ?></h1>
+						<p class="services"><?php echo get_field('services'); ?></p>
+						<?php if(get_field('turn_on_gallery')){ ?>
+							<?php echo do_shortcode('[case-study-gallery]'); ?>
+						<?php } ?>
+					</div>
 				</div>
 
 
