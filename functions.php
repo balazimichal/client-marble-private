@@ -1269,19 +1269,55 @@ function marble_titlebar() {
 	$marble_titlebar = null;
 
 	$marble_titlebar .= '<div class="marble-titlebar">';
-	$marble_titlebar .= '<div class="video-item" id="case-study-video">';
-	$marble_titlebar .= '<video width="100%" height="auto" preload="auto" poster="'.$video_image.'">';
-	$marble_titlebar .= '<source src="'.get_field('webm').'" type="video/webm">';
-	$marble_titlebar .= '<source src="'.get_field('mp4').'" type="video/mp4">';
-	$marble_titlebar .= '</video>';
-	$marble_titlebar .= '<div class="video-play-button">PLAY<br/>VIDEO</div>';
-	$marble_titlebar .= '</div>';
-	$marble_titlebar .= '<div class="video-sound marble-mute-button audio-off"><span class="video-sound-image"></span><span class="video-sound-text">AUDIO</span> <span class="switch-text"></span></div>';
+
+	if(get_field('titlebar_type')=='video'){
+		$marble_titlebar .= '<div class="video-item">';
+		$marble_titlebar .= '<video width="100%" height="auto" preload="auto" poster="'.$video_image.'">';
+		$marble_titlebar .= '<source src="'.get_field('webm').'" type="video/webm">';
+		$marble_titlebar .= '<source src="'.get_field('mp4').'" type="video/mp4">';
+		$marble_titlebar .= '</video>';
+		$marble_titlebar .= '<div class="video-play-button">PLAY<br/>VIDEO</div>';
+		$marble_titlebar .= '</div>';
+		$marble_titlebar .= '<div class="video-sound marble-mute-button audio-off"><span class="video-sound-image"></span><span class="video-sound-text">AUDIO</span> <span class="switch-text"></span></div>';
+	}
+
+	if(get_field('titlebar_type')=='gallery'){
+		$marble_titlebar .= '<div class="gallery-item">';
+		$marble_titlebar .= '<div class="flexslider mp-gallery">';
+        $marble_titlebar .= '<ul class="slides">';
+
+		if( have_rows('gallery') ):
+		while ( have_rows('gallery') ) : the_row();  
+
+		$image_object = get_sub_field('image');
+ 
+		// and the image size you want to return
+		$image_size = 'our-thought';
+		
+		// now, we'll exctract the image URL from $image_object
+		$image_url = $image_object['sizes'][$image_size];
+
+
+        $marble_titlebar .= '<li>';
+		$marble_titlebar .= '<img src="'.$image_url.'" alt="" />';
+        $marble_titlebar .= '</li>';
+
+		endwhile;
+		endif;
+
+
+        $marble_titlebar .= '</ul>';
+        $marble_titlebar .= '</div>';
+		$marble_titlebar .= '</div>';
+	}
+
 	$marble_titlebar .= '</div>';
 
 	$marble_titlebar .= '<style>
+	.gallery-item{background:#8bd3da;width:100%;height:auto;}
+
 	.video-item{position:relative;width:100%;height:100%;display:block;}
-	.video-item video{background:#8bd3da;object-fit: cover;}
+	.video-item video{background:#8bd3da;object-fit:cover;}
 	.video-play-button{display:block;width:120px;height:120px;background:#F47E76;color:#fff;position:absolute;top:50%;left:50%;margin-top:-60px;margin-left:-60px;z-index:99;font-size:14px;font-weight:700;text-align:center;-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;border-radius: 50%;cursor:pointer;display:table-cell;padding-top:35px;}
 
@@ -1297,6 +1333,12 @@ function marble_titlebar() {
 	</style>';
 
 	$marble_titlebar .= '<script>
+	jQuery(window).load(function() {
+	// FLEX SLIDER SETTINGS
+	jQuery(".flexslider").flexslider({
+		animation: Modernizr.touch ? "slide" : "fade",
+		controlNav: false,
+	});
 	
 	// GALLERY VIDEO PLAY BUTTON
     jQuery(".video-play-button").click(function() {
@@ -1334,7 +1376,8 @@ function marble_titlebar() {
         jQuery(this).removeClass("audio-on").addClass("audio-off");
     }
 
-    });
+	});
+	});
 	
 	</script>';
 
