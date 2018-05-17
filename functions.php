@@ -111,7 +111,7 @@ add_shortcode('mp-cta-journal', 'mp_cta_journal');
 // MARBLE SOCIAL
 function marble_social() { 
 	$marble_social = null;
-	$marble_social =  do_shortcode('[fusion_social_links icons_boxed="" icons_boxed_radius="" color_type="" icon_colors="" box_colors="" tooltip_placement="" blogger="" deviantart="" digg="" dribbble="" dropbox="" facebook="https://www.facebook.com/MarbleLDN/?ref=br_rs&hc_ref=ARTGEN5r2OzEiuxRd5Z_5VeP3idDX4DlHAmzdxGoZuM_U9kWsSn3EtaAfEpcxYAvTbk" flickr="" forrst="" googleplus="" instagram="https://www.instagram.com/marble_ldn/" linkedin="https://www.linkedin.com/company/11149903/" myspace="" paypal="" pinterest="" reddit="" rss="" skype="" soundcloud="" spotify="" tumblr="" twitter="" vimeo="" vk="" xing="" yahoo="" yelp="" youtube="https://www.youtube.com/channel/UCjzzZNhepFtiZl3b4fa0SjQ" email="" show_custom="no" alignment="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id="" /]'); 
+	$marble_social =  do_shortcode(get_field('social_links','option')); 
 	return $marble_social;
 }
 add_shortcode('marble-social', 'marble_social');
@@ -1011,37 +1011,18 @@ function marble_footer() {
 
 	$marble_footer .= '<div class="footer-col-1">';
 	$marble_footer .= '<h6>Marble Studio</h6>';
-	$marble_footer .= '<ul>';
-	$marble_footer .= '<li>Studio 55</li>';
-	$marble_footer .= '<li>Great Western Studios</li>';
-	$marble_footer .= '<li>Alfred Road</li>';
-	$marble_footer .= '<li>London</li>';
-	$marble_footer .= '<li>W2 5EU</li>';
-	$marble_footer .= '</ul>';	
-	$marble_footer .= '<ul>';
-	$marble_footer .= '<li><a href="tel:07985215746">07985 215746</a></li>';
-	$marble_footer .= '<li><a href="mailto:info@marbleldn.com">info@marbleldn.com</a></li>';
-	$marble_footer .= '</ul>';	
+	$marble_footer .= get_field('studio','option');
 	$marble_footer .= '</div>';
 
 	$marble_footer .= '<div class="footer-col-2">';
 	$marble_footer .= '<h6>Marble Warehouse</h6>';
-	$marble_footer .= '<ul>';
-	$marble_footer .= '<li>19 Osiers Road</li>';
-	$marble_footer .= '<li>Unit 2</li>';
-	$marble_footer .= '<li>Building 5</li>';
-	$marble_footer .= '<li>London</li>';
-	$marble_footer .= '<li>SW18 1NL</li>';
-	$marble_footer .= '</ul>';
-	$marble_footer .= '<ul>';
-	$marble_footer .= '<li><a href="tel:02030115388">02030115388</a></li>';
-	$marble_footer .= '<li><a href="mailto:info@marbleldn.com">info@marbleldn.com</a></li>';
-	$marble_footer .= '</ul>';
+	$marble_footer .= get_field('warehouse','option');
+
 	$marble_footer .= '</div>';
 
 	$marble_footer .= '<div class="footer-col-3">';
 	$marble_footer .= '[marble-social]';	
-	$marble_footer .= '<img class="marble-footer-logo" src="http://happyrobot.eu/marble-private/wp-content/uploads/2018/05/mp-logo-footer.png" alt="" />';
+	$marble_footer .= '<img class="marble-footer-logo" src="'.get_field('logo','option').'" alt="" />';
 	$marble_footer .= '</div>';
 
 	$marble_footer .= '</div>';
@@ -1054,38 +1035,18 @@ function marble_footer() {
 
 
 	$marble_footer .= '<div class="footer-col-3">';
-	$marble_footer .= '<img class="marble-footer-logo" src="http://happyrobot.eu/marble-private/wp-content/uploads/2018/05/mp-logo-footer.png" alt="" />';
+	$marble_footer .= '<img class="marble-footer-logo" src="'.get_field('logo','option').'" alt="" />';
 	$marble_footer .= '[marble-social]';
 	$marble_footer .= '</div>';
 
 	$marble_footer .= '<div class="footer-col-1">';
 	$marble_footer .= '<h6>Marble Studio</h6>';
-	$marble_footer .= '<ul>';
-	$marble_footer .= '<li>Studio 55</li>';
-	$marble_footer .= '<li>Great Western Studios</li>';
-	$marble_footer .= '<li>Alfred Road</li>';
-	$marble_footer .= '<li>London</li>';
-	$marble_footer .= '<li>W2 5EU</li>';
-	$marble_footer .= '</ul>';	
-	$marble_footer .= '<ul>';
-	$marble_footer .= '<li><a href="tel:07985215746">07985 215746</a></li>';
-	$marble_footer .= '<li><a href="mailto:info@marbleldn.com">info@marbleldn.com</a></li>';
-	$marble_footer .= '</ul>';	
+	$marble_footer .= get_field('studio','option');	
 	$marble_footer .= '</div>';
 
 	$marble_footer .= '<div class="footer-col-2">';
 	$marble_footer .= '<h6>Marble Warehouse</h6>';
-	$marble_footer .= '<ul>';
-	$marble_footer .= '<li>19 Osiers Road</li>';
-	$marble_footer .= '<li>Unit 2</li>';
-	$marble_footer .= '<li>Building 5</li>';
-	$marble_footer .= '<li>London</li>';
-	$marble_footer .= '<li>SW18 1NL</li>';
-	$marble_footer .= '</ul>';
-	$marble_footer .= '<ul>';
-	$marble_footer .= '<li><a href="tel:02030115388">02030115388</a></li>';
-	$marble_footer .= '<li><a href="mailto:info@marbleldn.com">info@marbleldn.com</a></li>';
-	$marble_footer .= '</ul>';
+	$marble_footer .= get_field('warehouse','option');
 	$marble_footer .= '</div>';
 
 
@@ -1095,7 +1056,7 @@ function marble_footer() {
 
 
 	$marble_footer .= '<div class="marble-footer-copyright">';
-	$marble_footer .= 'COPYRIGHT [auto-year] MARBLE LDN. ALL RIGHTS RESERVED.';
+	$marble_footer .= get_field('copyright','option');
 	$marble_footer .= '</div>';
 	$marble_footer .= '</div>';
 
