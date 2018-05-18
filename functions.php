@@ -1308,13 +1308,28 @@ function marble_titlebar() {
 
         $marble_titlebar .= '</ul>';
         $marble_titlebar .= '</div>';
+		$marble_titlebar .= '<div class="mp-custom-slider-panel">';
+		$marble_titlebar .= '<div class="mp-slider-social">[marble-social]</div>';
+		$marble_titlebar .= '<div class="mp-custom-slider-navigation">';
+		$marble_titlebar .= '<a href="#" class="flex-next"><i class="fa fa-chevron-right"></i></a>';
+		$marble_titlebar .= '<span class="flex-count">NO.00<span class="mp-slide-no"></span></span>';
+		$marble_titlebar .= '<a href="#" class="flex-prev"><i class="fa fa-chevron-left"></i></a>';
+		$marble_titlebar .= '</div>';
+		$marble_titlebar .= '</div>';
 		$marble_titlebar .= '</div>';
 	}
 
 	$marble_titlebar .= '</div>';
 
 	$marble_titlebar .= '<style>
-	.gallery-item{background:#8bd3da;width:100%;height:auto;}
+	.flexslider{margin-bottom:15px;}
+	.gallery-item{width:100%;height:auto;}
+	.gallery-item .slides li{background:background:#8bd3da;}
+	.mp-custom-slider-navigation:after{content:"";display:block;clear:both;}
+	.mp-slider-social{float:left;}
+	.flex-next{float:right;margin-left:15px;font-size:30px;}
+	.flex-prev{float:right;margin-left:15px;font-size:30px;}
+	.flex-count{float:right;margin-left:15px;line-height:30px;}
 
 	.video-item{position:relative;width:100%;height:100%;display:block;}
 	.video-item video{background:#8bd3da;object-fit:cover;}
@@ -1338,7 +1353,15 @@ function marble_titlebar() {
 	jQuery(".flexslider").flexslider({
 		animation: Modernizr.touch ? "slide" : "fade",
 		controlNav: false,
+		customDirectionNav: jQuery(".mp-custom-slider-navigation a"),
+        start: function(slider) {
+            jQuery(".mp-slide-no").text(slider.currentSlide);
+		},
+		after: function(slider) {
+            jQuery(".mp-slide-no").text(slider.currentSlide);
+        }
 	});
+
 	
 	// GALLERY VIDEO PLAY BUTTON
     jQuery(".video-play-button").click(function() {
@@ -1380,7 +1403,7 @@ function marble_titlebar() {
 	});
 	
 	</script>';
-
+	$marble_titlebar = do_shortcode($marble_titlebar);
 	return $marble_titlebar;
 	}
 
