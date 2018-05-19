@@ -1271,12 +1271,19 @@ function marble_titlebar() {
 	$marble_titlebar .= '<div class="marble-titlebar">';
 
 	if(get_field('titlebar_type')=='video'){
-		$marble_titlebar .= '<div class="video-item">';
+		if(get_field('video_autoplay')){
+			$marble_titlebar .= '<div class="video-item autoplay">';
+		} else {
+			$marble_titlebar .= '<div class="video-item manual">';
+
+		}
 		$marble_titlebar .= '<video width="100%" height="auto" preload="auto" poster="'.$video_image.'">';
 		$marble_titlebar .= '<source src="'.get_field('webm').'" type="video/webm">';
 		$marble_titlebar .= '<source src="'.get_field('mp4').'" type="video/mp4">';
 		$marble_titlebar .= '</video>';
-		$marble_titlebar .= '<div class="video-play-button">PLAY<br/>VIDEO</div>';
+		if(!get_field('video_autoplay')){
+			$marble_titlebar .= '<div class="video-play-button">PLAY<br/>VIDEO</div>';
+		}
 		$marble_titlebar .= '</div>';
 		$marble_titlebar .= '<div class="video-sound marble-mute-button audio-off"><span class="video-sound-image"></span><span class="video-sound-text">AUDIO</span> <span class="switch-text"></span></div>';
 	}
@@ -1349,8 +1356,8 @@ function marble_titlebar() {
 
 	$marble_titlebar .= '<script>
 	jQuery(window).load(function() {
-	// FLEX SLIDER SETTINGS
-	jQuery(".flexslider").flexslider({
+	// GALLERY - FLEX SLIDER SETTINGS
+	jQuery(".gallery-item .flexslider").flexslider({
 		animation: Modernizr.touch ? "slide" : "fade",
 		controlNav: false,
 		customDirectionNav: jQuery(".mp-custom-slider-navigation a"),
@@ -1363,7 +1370,7 @@ function marble_titlebar() {
 	});
 
 	
-	// GALLERY VIDEO PLAY BUTTON
+	//  VIDEO - PLAY BUTTON
     jQuery(".video-play-button").click(function() {
         if (jQuery(".video-item video").get(0).paused == false) {
             jQuery(".video-item video").get(0).pause();
@@ -1373,18 +1380,18 @@ function marble_titlebar() {
         }
     });
 
-    // PAUSE VIDEO ON CLICK
-    jQuery(".video-item video").click(function() {
+    // VIDEO - PAUSE VIDEO ON CLICK
+    jQuery(".video-item.manual video").click(function() {
         jQuery(".video-item video").get(0).pause();
         jQuery(".video-play-button").fadeIn();
     });
 
-    // DETECT WHEN VIDEO FINISHED PLAYING AND DISPLAY PLAY BUTTON
-    jQuery(".video-item video").on("ended",function(){
+    // VIDEO - DETECT WHEN VIDEO FINISHED PLAYING AND DISPLAY PLAY BUTTON
+    jQuery(".video-item.manual video").on("ended",function(){
         jQuery(".video-play-button").fadeIn();
 	});
 	
-	// VOLUME ON/OFF CONTROL
+	// VIDEO - VOLUME ON/OFF CONTROL
     jQuery(".video-item video").prop("muted", true);
 
 
@@ -1400,6 +1407,14 @@ function marble_titlebar() {
     }
 
 	});
+
+	// VIDEO AUTOPLAY 
+	jQuery(".video-item.autoplay video").delay( 800 ).trigger("play");
+
+	console.log("latest one");
+
+
+
 	});
 	
 	</script>';
