@@ -1463,3 +1463,59 @@ function marble_titlebar() {
 
 }
 add_shortcode('marble-titlebar', 'marble_titlebar');
+
+
+
+
+
+
+
+
+
+// OUR WORK FANCY
+function mp_our_work_fancy() {
+	$mp_our_work_fancy = null;
+
+
+
+	$args = array(
+	'post_type' => 'our_work',
+	'post_status' => 'publish',
+	'orderby' => 'date',
+	'order'   => 'DESC',
+	'posts_per_page' => 3,
+	);
+	// The Query
+	$the_query = new WP_Query( $args );    
+	// The Loop
+	if ( $the_query->have_posts() ) {
+	$mp_our_work_fancy = '<div class="mp-our-work-fancy">';
+	while ( $the_query->have_posts() ) {
+	$the_query->the_post();
+
+
+	$mp_our_work_fancy .= '<div class="mp-fancy-work">';
+	$mp_our_work_fancy .= '<div class="mp-fancy-work-image"><a href="' . get_permalink() . '">'.get_the_post_thumbnail(get_the_ID(),array( 1200, 600)).'</a></div>';
+	$mp_our_work_fancy .= '<div class="sequence1"></div>';
+	$mp_our_work_fancy .= '<div class="sequence2"></div>';
+	$mp_our_work_fancy .= '</div>';
+
+	}
+	
+	$mp_our_work_fancy .= '</div>';
+	$mp_our_work_fancy .= '<style>
+	.mp-our-work-fancy{padding:50px 0;}
+	.mp-fancy-work{margin-bottom:50px;position:relative;}
+	.mp-fancy-work-image img{width:100%;}
+	.sequence1{width:50px;height:100%;position:absolute;top:0;left:33.33%;margin-left:-25px;z-index:100;background:#fff;}
+	.sequence2{width:50px;height:100%;position:absolute;top:0;left:66.66%;margin-left:-25px;z-index:100;background:#fff;}
+	@media only screen and (max-width: 800px) {
+		.mp-fancy-work{margin-bottom:20px;}
+		.sequence1{width:20px;}
+		.sequence2{width:20px;}	
+	}	
+	</style>';
+	}
+	return $mp_our_work_fancy; 
+}
+add_shortcode('mp-our-work-fancy', 'mp_our_work_fancy');
