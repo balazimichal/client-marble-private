@@ -46,6 +46,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 
 				<?php the_content(); ?>
+
+				<div class="our-thoughts-social only-mobile">
+					<?php echo do_shortcode('[marble-social]'); ?>
+				</div>
 			</div>
 
 			

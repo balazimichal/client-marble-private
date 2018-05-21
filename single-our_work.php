@@ -25,8 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="post-content">
 				<div class="mp-menu-space">
 					<div class="our-work-titlebar">
-						<h1 class="mp-title"><?php echo get_the_title(); ?></h1>
-						<p class="services"><?php echo get_field('services'); ?></p>
+						<h1 class="mp-title mp-mobile-center"><?php echo get_the_title(); ?></h1>
+						<h3 class="mp-mobile-center only-mobile">Services</h3>
+						<p class="services mp-mobile-center"><?php echo get_field('services'); ?></p>
 						<?php if(get_field('turn_on_gallery')){ ?>
 							<?php echo do_shortcode('[case-study-gallery]'); ?>
 						<?php } ?>
@@ -57,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php if(get_field('turn_on_testimonials')){ ?>
 				<div class="our-work-testimonial">
-						<h3>Testimonials</h3>
+						<h3 class="mp-mobile-center">Testimonials</h3>
                         <div class="flexslider">
                           <ul class="slides">
                                 <?php      
@@ -76,7 +77,17 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 ?>
 
                           </ul>
-                        </div>
+						</div>
+						<script>
+							// TESTIMONIAL - FLEX SLIDER SETTINGS
+							jQuery( document ).ready(function() {
+								jQuery(".our-work-testimonial .flexslider").flexslider({
+									animation: Modernizr.touch ? "slide" : "fade",
+									controlNav: false,
+									directionNav: false
+								});
+							});
+						</script>
                     </div>
                 <?php } ?>
 

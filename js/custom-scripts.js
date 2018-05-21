@@ -235,6 +235,31 @@ jQuery( document ).ready(function() {
 
 
 
+  // CLOSE THE GRID DROPDOWN ON MOBILE AFTER SELECTION
+
+  jQuery('.tg-grid-area-top1').click(function (event) {
+    if (jQuery(window).width() < 1250) {
+      event.stopPropagation();
+      jQuery(".tg-filters-holder").css("visibility", "visible");
+      console.log('filter clicked');
+    }
+  });
+
+  jQuery(".tg-filters-holder").on("click", function (event) {
+    if (jQuery(window).width() < 1250) {
+      event.stopPropagation();
+      jQuery(".tg-filters-holder").css("visibility", "hidden");
+    }
+  });
+
+
+  jQuery(document).on("click", function () {
+    if (jQuery(window).width() < 1250) {
+      jQuery(".tg-filters-holder").css("visibility", "hidden");
+    }
+  });
+
+
 
 
 

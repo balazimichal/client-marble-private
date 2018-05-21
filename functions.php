@@ -660,6 +660,7 @@ function mp_our_thoughts() {
 	$mp_our_thoughts .= '<style>
 	.mp-blog{margin-left:-10%;}
 	.mp-post{width:40%;margin-left:10%;float:left;margin-bottom:65px;}
+	.mp-post:last-child{margin-bottom:0;}
 	.mp-post.first-post{width:90%;margin-left:10%;float:none;}
 	#wrapper .post-content .mp-post h2{font-size:38px;line-height:68px;}
 	.mp-read-more{font-size:18px;font-family:"spectra-light";text-decoration:underline;}
@@ -733,7 +734,7 @@ $args = array(
 );
 $current_cat = null;
 if(is_page('marbled-thoughts')) $current_cat = 'current-cat';
-$marble_cat .= '<div class="marble-blog-categories">';
+$marble_cat .= '<div class="marble-blog-categories only-desktop">';
 $marble_cat .= '<span class="mp-cat-about">Have a look at what inspires us and what we are thinking about.</span>';
 $marble_cat .= '<ul>';
 $marble_cat .= '<li class="'.$current_cat.'"><a href="/marble-private/marbled-thoughts/">All</a></li>';
@@ -741,19 +742,47 @@ $marble_cat .= wp_list_categories($args);
 $marble_cat .= '</ul>';
 $marble_cat .= '</div>';
 
+$marble_cat .= '<div class="marble-blog-categories only-mobile">';
+$marble_cat .= '<span class="mp-cat-about">FILTER BY:</span>';
+$marble_cat .= '<span class="mp-cat-filter-button"><a href="#">FILTER</a></span>';
+$marble_cat .= '<ul class="mp-cat-dropdown active">';
+$marble_cat .= '<li class="'.$current_cat.'"><a href="/marble-private/marbled-thoughts/">All</a></li>';
+$marble_cat .= wp_list_categories($args);
+$marble_cat .= '</ul>';
+$marble_cat .= '</div>';
+
 $marble_cat .= '<style>
-.marble-blog-categories{margin-bottom:45px;}
+.marble-blog-categories{margin-bottom:45px;position:relative;}
 .marble-blog-categories:after{content: "";display: block;clear: both;}
 .marble-blog-categories ul{margin:0;padding:0;float:right;}
 .marble-blog-categories li{display:inline-block;padding-left:30px;}
 .marble-blog-categories li.current-cat a{font-weight:bold;}
+.only-mobile{display:none;}
+.only-desktop{display:block;}
 @media (max-width: 1080px) {
-	.mp-cat-about{display:block;margin-bottom:45px;}
-	.marble-blog-categories ul{display:block;margin-bottom:45px;float:none;}
-	.marble-blog-categories ul li{padding-left:0;}
-	.marble-blog-categories ul li a{padding:0 20px;margin-right:15px;margin-bottom:15px;height:50px;line-height:50px;text-align:center;background:#f5f5f5;display:inline-block;}
+	.marble-blog-categories{border-top:1px solid #ddd;padding-top:20px;}
+    .only-mobile{display:block;}
+	.only-desktop{display:none;}
+	.mp-cat-filter-button{float:right;}
+	.mp-cat-dropdown{display:block;position:absolute !important;right:0;background:#fff;text-align:left;z-index:9999;padding:20px 0;}
+	.mp-cat-dropdown li{text-align:right;height:50px;}
+	.mp-cat-dropdown li a{line-height:50px;text-transform:uppercase;}
+	.mp-cat-dropdown.active{}
+	.marble-blog-categories .mp-cat-dropdown li{display:block;} 
 }
 </style>';
+$marble_cat .= '<script>
+	jQuery(function() {	
+		// TOGGLE FILTER MENU
+		jQuery(".mp-cat-dropdown").hide();
+		jQuery(".mp-cat-filter-button").click(function(e) {
+			e.preventDefault();
+			console.log("clicked");
+			jQuery(".mp-cat-dropdown").slideToggle(300);
+			jQuery(".mp-cat-dropdown").toggleClass("active");
+		});
+	});
+</script>';
 return $marble_cat;
 }
 add_shortcode('marble-blog-categories', 'marble_blog_categories');
@@ -799,13 +828,14 @@ function marble_similar_projects() {
 	$marble_similar_projects .= '</div>';
 
 	$marble_similar_projects .= '<style>
-	.mp-similar-projects{margin-left:-3.33%;border-top:1px solid #ddd;padding:100px 0 50px;}
+	.mp-similar-projects{margin-left:-3.33%;padding:100px 0 50px;}
 	.mp-similar-projects:after{content: "";display: block;clear: both;}
 	.mp-similar-project{float:left;width:30%;margin-left:3.33%;margin-bottom:50px;}
 	.mp-similar-project img{margin-bottom:40px;}
 	@media (max-width: 800px) {
 		.mp-similar-projects{margin-left:0;}
 		.mp-similar-project{float:none;width:100%;margin-left:0;}
+		.mp-similar-projects{padding-bottom:0;}
 	}
 	</style>';
 
@@ -860,6 +890,9 @@ function mp_thoughts_social() {
 	$mp_thoughts_social .= '<style>
 	.marble-thoughts-social{text-align:center;}
 	.marble-thoughts-social a{text-decoration:underline;font-size:18px;font-family:"spectral-light"}
+	@media (max-width: 800px) {
+		.marble-thoughts-social{display:none;}
+	}
 	</style>';
 	$mp_thoughts_social = do_shortcode($mp_thoughts_social); 
 	return $mp_thoughts_social;
