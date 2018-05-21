@@ -957,7 +957,7 @@ function marble_mobile_navigation() {
 		.marble-mobile-navigation-bar{height:80px;line-height:80px;padding:0 30px;font-size:15px;}
 		#marble-mobile-nav-trigger{float:right;max-width:21px;margin-top:28px;}
 		.marble-mobile-navigation-dropdown{background:#000;width:100%;position:absolute;z-index:100;}
-		.marble-mobile-navigation-dropdown ul{margin:0;padding:30px;}
+		.marble-mobile-navigation-dropdown ul{margin:0;padding:0 30px;}
 		.marble-mobile-navigation-dropdown ul li{list-style:none;}
 		.marble-mobile-navigation-dropdown ul li a{color:#fff !important;text-transform:uppercase;font-size:24px;line-height:72px;}
 		.marble-mobile-navigation-dropdown .fusion-social-networks-wrapper{padding:30px;}
@@ -1277,7 +1277,7 @@ function marble_titlebar() {
 			$marble_titlebar .= '<div class="video-item manual">';
 
 		}
-		$marble_titlebar .= '<video width="100%" height="auto" preload="auto" poster="'.$video_image.'">';
+		$marble_titlebar .= '<video loop width="100%" height="auto" preload="auto" poster="'.$video_image.'">';
 		$marble_titlebar .= '<source src="'.get_field('webm').'" type="video/webm">';
 		$marble_titlebar .= '<source src="'.get_field('mp4').'" type="video/mp4">';
 		$marble_titlebar .= '</video>';
@@ -1351,6 +1351,12 @@ function marble_titlebar() {
 	.marble-mute-button.audio-on .video-sound-image{width:40px;height:32px;display:inline-block;background:url("https://marbleldn.com/wp-content/uploads/2017/11/marble-audio-mute.png") no-repeat 0 0;}
 	@media only screen and (max-width: 1024px) {
 	.marble-mute-button{display:none;}
+	}
+	@media only screen and (max-width: 800px) {
+	.marble-titlebar{
+	    margin-left: -30px;
+		margin-right: -30px;
+	}
 	}
 	</style>';
 
