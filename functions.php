@@ -371,10 +371,10 @@ function marble_team() {
 		.marble-team-member .hidden-content ul{margin:0;padding:0 30px;}
 		.marble-team-member .hidden-content ul li{color:#fff !important;margin-bottom:10px;}
 
-		.team-member-mobile-wrap{background:rgba(0,0,0,0.9);padding:30px;position:absolute;left:0;display:none;color:#fff;width:100%;}
+		.team-member-mobile-wrap{background:rgba(0,0,0,0.9);padding:30px;position:absolute;left:30px;display:none;color:#fff;}
 		.team-member-mobile-wrap h3{color:#F47E76;margin-bottom:20px;}
 		.team-member-mobile-wrap img{margin-bottom:30px;}
-		.member-close-button{display:block;width:60px;height:30px;position:absolute;top:46px;right:30px;cursor:pointer;font-size:14px;letter-spacing:1px;}
+		.member-close-button{display:block;width:60px;height:30px;position:absolute;top:40px;right:30px;cursor:pointer;font-size:14px;letter-spacing:1px;}
 
 
 		@media only screen and (max-width: 1600px) {
@@ -403,6 +403,7 @@ function marble_team() {
 			.marble-team-member{width:100%;float:left;margin-left:0%}
 			.marble-team-title{padding:10px;}
 			.hidden-content-wrap{padding:40px;}
+			.team-member-mobile-wrap{left:0;}
 		}
 
 		@media only screen and (max-width: 400px) {
@@ -905,10 +906,15 @@ add_shortcode('mp-thoughts-social', 'mp_thoughts_social');
 
 
 
-// REGISTER MARBLE MENU
+// REGISTER MARBLE MENUS
 add_action( 'after_setup_theme', 'register_marble_menu' );
 function register_marble_menu() {
   register_nav_menu( 'marble_custom_menu', __( 'Marble Private Menu', 'marble' ) );
+}
+
+add_action( 'after_setup_theme', 'register_marble_mobile_menu' );
+function register_marble_mobile_menu() {
+  register_nav_menu( 'marble_custom_mobile_menu', __( 'Marble Private Mobile Menu', 'marble' ) );
 }
 
 
@@ -918,6 +924,7 @@ function marble_navigation() {
 
 	$marble_menu = wp_nav_menu(
 								array(
+									'theme_location' => 'marble_custom_menu',
 									'echo' => false
 									)
 							);
@@ -959,6 +966,7 @@ function marble_mobile_navigation() {
 
 	$marble_menu = wp_nav_menu(
 								array(
+									'theme_location' => 'marble_custom_mobile_menu',
 									'echo' => false
 									)
 							);
