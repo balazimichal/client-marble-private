@@ -18,6 +18,10 @@ This client project can be seen on https://marbleldn.com/
 - adding option to get separate qote (hire section)
 - custom footer
 
+## Dependencies
+
+Since this is child theme it is dependant on [AVADA theme](https://avada.theme-fusion.com/). It is also dependant on [ACF fields](https://www.advancedcustomfields.com/) plugin.
+
 ## License
 
 This is a client project, therefore no copies are allowed. This repo servers only purpose to showcase my work.
